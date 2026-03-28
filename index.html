@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Рабочий резерв в Челябинске: грузчики, подсобные рабочие и уборка территории от 400 руб/час.">
+  <title>Рабочий резерв — разнорабочие в Челябинске</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">К основному содержимому</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Рабочий резерв — наверх">Рабочий резерв</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="#welcome" data-nav="welcome">О нас</a></li>
+          <li><a href="#services" data-nav="services">Услуги</a></li>
+          <li><a href="#calculator" data-nav="calculator">Калькулятор</a></li>
+          <li><a href="#prices" data-nav="prices">Цены</a></li>
+          <li><a href="#why" data-nav="why">Почему мы</a></li>
+          <li><a href="#faq" data-nav="faq">Вопросы</a></li>
+          <li><a href="#form" data-nav="form">Заявка</a></li>
+          <li><a href="#contacts" data-nav="contacts">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" title="Светлая / тёмная тема">
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
+        </button>
+        <a href="#form" class="btn btn-header">Заказать</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-label="Главный экран">
+      <div class="container hero-inner">
+        <p class="hero-eyebrow">Челябинск и область</p>
+        <h1>Разнорабочие без лишних слов</h1>
+        <p class="hero-lead">Грузчики, подсобники и уборка территории — от 400 ₽/час. Выезд в день обращения, договоримся по телефону или в Telegram.</p>
+        <div class="hero-actions">
+          <a href="tel:89235029493" class="btn">Позвонить</a>
+          <a href="#form" class="btn btn-outline">Оставить заявку</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+      <div class="container">
+        <h2 id="welcome-title" class="visually-hidden">Коротко о сервисе</h2>
+        <ul class="welcome-chips" role="list">
+          <li class="chip">От 400 ₽/час — прозрачно</li>
+          <li class="chip">Работаем в выходные</li>
+          <li class="chip">Проверенные бригады</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="services" class="section-block" aria-labelledby="services-title">
+      <div class="container">
+        <h2 id="services-title">Услуги</h2>
+        <p class="section-intro">Подберём состав бригады под вашу задачу — от разовой разгрузки до нескольких смен подряд.</p>
+        <div class="services">
+          <article class="card">
+            <h3>Грузчики</h3>
+            <p>Переезды, разгрузка фур, склад, подъём на этаж.</p>
+          </article>
+          <article class="card">
+            <h3>Подсобные рабочие</h3>
+            <p>Стройка, демонтаж, помощь бригаде, разнорабочие на объекте.</p>
+          </article>
+          <article class="card">
+            <h3>Уборка территории</h3>
+            <p>Снег, мусор, подготовка участка, вывоз мелкого мусора по договорённости.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator" class="section-block section-alt" aria-labelledby="calc-title">
+      <div class="container">
+        <h2 id="calc-title">Калькулятор стоимости</h2>
+        <p class="section-intro">Ориентировочная сумма за выбранное число часов. Итоговая цена зависит от сложности — уточним по телефону.</p>
+        <div class="calculator" id="price-calculator">
+          <div class="calc-row">
+            <label for="calc-hours">Часов работы</label>
+            <input type="number" id="calc-hours" name="calc-hours" min="1" max="720" value="4" inputmode="numeric">
+          </div>
+          <div class="calc-row">
+            <span class="calc-label" id="rate-label">Ставка за час</span>
+            <div class="rate-options" role="group" aria-labelledby="rate-label">
+              <label class="rate-option"><input type="radio" name="rate" value="400" checked> 400 ₽</label>
+              <label class="rate-option"><input type="radio" name="rate" value="500"> 500 ₽</label>
+              <label class="rate-option"><input type="radio" name="rate" value="650"> 650 ₽</label>
+            </div>
+          </div>
+          <p class="calc-result" aria-live="polite">
+            Примерно: <strong id="calc-total">1600</strong> <span class="calc-currency">₽</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="prices" class="section-block" aria-labelledby="prices-title">
+      <div class="container">
+        <h2 id="prices-title">Цены</h2>
+        <p>Ставка <strong>от 400 до 650 ₽/час</strong> на одного работника в зависимости от задачи, срочности и условий на объекте.</p>
+        <p class="muted">Минимальное время выезда и возможные доплаты обсуждаем индивидуально.</p>
+      </div>
+    </section>
+
+    <section id="why" class="section-block section-alt" aria-labelledby="why-title">
+      <div class="container">
+        <h2 id="why-title">Почему мы</h2>
+        <ul class="advantages">
+          <li>Быстрый выезд и согласование сроков</li>
+          <li>Рабочие с опытом на подобных задачах</li>
+          <li>Работаем без выходных по договорённости</li>
+          <li>Связь по телефону, почте и Telegram</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="section-block" aria-labelledby="faq-title">
+      <div class="container">
+        <h2 id="faq-title">Частые вопросы</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Как быстро можете приехать?</summary>
+            <p>Зависит от загрузки и района. В большинстве случаев договариваемся о выезде в день обращения или на следующий день — уточните в звонке или заявке.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Нужна ли предоплата?</summary>
+            <p>Условия оплаты обсуждаем заранее под конкретную задачу. Напишите или позвоните — подскажем по вашему случаю.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Работаете ли ночью или в выходные?</summary>
+            <p>Да, по договорённости. Ночные и праздничные смены могут влиять на ставку — это заранее оговариваем.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Можно ли заказать только грузчиков без машины?</summary>
+            <p>Да. Если нужен только труд на объекте — подберём состав бригады без транспорта.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="form" class="section-block section-alt" aria-labelledby="form-title">
+      <div class="container">
+        <h2 id="form-title">Оставить заявку</h2>
+        <p class="section-intro">Заполните поля — откроется Telegram с готовым текстом. Останется только отправить сообщение.</p>
+        <form id="request-form" novalidate>
+          <label for="name">Имя</label>
+          <input type="text" id="name" name="name" placeholder="Ваше имя" required autocomplete="name">
+
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required autocomplete="tel">
+
+          <label for="task">Описание задачи</label>
+          <textarea id="task" name="task" placeholder="Адрес, что нужно сделать, желаемое время"></textarea>
+
+          <label for="date">Удобная дата и время</label>
+          <input type="datetime-local" id="date" name="date">
+
+          <button class="btn" type="submit">Отправить через Telegram</button>
+          <p id="form-status" class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contacts" class="section-block" aria-labelledby="contacts-title">
+      <div class="container">
+        <h2 id="contacts-title">Контакты</h2>
+        <ul class="contact-list">
+          <li>Телефон: <a href="tel:89235029493">8 923 502-94-93</a></li>
+          <li>Email: <a href="mailto:r.rezerv74@mail.ru">r.rezerv74@mail.ru</a></li>
+          <li>Город: Челябинск</li>
+          <li>Telegram: <a href="https://t.me/avk4488" target="_blank" rel="noopener noreferrer">@avk4488</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Рабочий резерв</p>
+      <a href="#main-content" class="footer-top">Наверх</a>
+    </div>
+  </footer>
+
+  <a href="tel:89235029493" class="call-btn" aria-label="Позвонить">📞</a>
+  <a href="https://t.me/avk4488" class="tg-btn" aria-label="Написать в Telegram" target="_blank" rel="noopener noreferrer">✈</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
