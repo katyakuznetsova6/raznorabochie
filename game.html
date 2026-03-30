@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Собери бригаду</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+  font-family: Arial;
+  color: white;
+}
+
+canvas {
+  display: block;
+}
+
+/* финальный экран */
+#endScreen {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+#endScreen h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#endScreen p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#endScreen button {
+  padding: 15px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #00ffc3;
+  border: none;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="endScreen">
+  <h1 id="endTitle"></h1>
+  <p id="endText"></p>
+  <button onclick="goToForm()">Получить нормальную бригаду</button>
+</div>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let basket = { x: canvas.width/2, y: canvas.height - 80, w: 140 };
+let workers = [];
+let score = 0;
+let time = 20;
+let gameOver = false;
+
+// движение корзины
+document.addEventListener("mousemove", e => {
+  basket.x += (e.clientX - basket.x - basket.w/2) * 0.2;
+});
+document.addEventListener("touchmove", e => {
+  e.preventDefault();
+  basket.x += (e.touches[0].clientX - basket.x - basket.w/2) * 0.2;
+}, { passive: false });
+
+// спавн работников
+setInterval(() => {
+  if(gameOver) return;
+
+  workers.push({
+    x: Math.random() * canvas.width,
+    y: -20,
+    type: Math.random() > 0.3 ? "good" : "bad"
+  });
+}, 600);
+
+// таймер
+setInterval(() => {
+  if(gameOver) return;
+
+  time--;
+
+  if(time <= 0){
+    gameOver = true;
+    showEnd();
+  }
+}, 1000);
+
+// рисуем работников
+function drawWorker(w){
+  ctx.font = "32px Arial";
+  ctx.textAlign = "center";
+
+  let emoji = "👷";
+  if (w.type === "bad") emoji = "📱";
+
+  ctx.fillText(emoji, w.x, w.y);
+}
+
+// основной цикл
+function update(){
+  if(gameOver) return;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // корзина (прораб)
+  ctx.fillStyle = "#00ffc3";
+  ctx.fillRect(basket.x, canvas.height-60, basket.w, 12);
+
+  workers.forEach(w=>{
+    w.y += 3.5;
+    drawWorker(w);
+
+    // ловим
+    if(
+      w.y > canvas.height-60 &&
+      w.x > basket.x &&
+      w.x < basket.x + basket.w
+    ){
+      if(w.type === "good") score +=10;
+      else score -=15;
+
+      w.y = canvas.height + 50;
+    }
+  });
+
+  workers = workers.filter(w=>w.y < canvas.height);
+
+  // интерфейс
+  ctx.fillStyle = "white";
+  ctx.font = "18px Arial";
+  ctx.fillText("Время: " + time, 20, 30);
+  ctx.fillText("Очки: " + score, 20, 60);
+  ctx.fillText("👷 норм | 📱 пропадёт", 20, 90);
+
+  requestAnimationFrame(update);
+}
+
+update();
+
+// финальный экран
+function showEnd(){
+  const end = document.getElementById("endScreen");
+  const title = document.getElementById("endTitle");
+  const text = document.getElementById("endText");
+
+  end.style.display = "flex";
+
+  if(score < 30){
+    title.innerText = "Объект встал";
+    text.innerText = "Рабочие пропали. Сроки сорваны.";
+  } 
+  else if(score < 80){
+    title.innerText = "Можно лучше";
+    text.innerText = "Часть бригады отвалилась.";
+  } 
+  else {
+    title.innerText = "Чистая работа";
+    text.innerText = "Без срывов. Как и должно быть.";
+  }
+}
+
+// переход в форму
+function goToForm(){
+  window.parent.location.href = "#form";
+}
+</script>
+
+</body>
+</html>
