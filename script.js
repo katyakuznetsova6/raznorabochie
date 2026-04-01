@@ -181,11 +181,12 @@
     ].join("\n");
 
     const encodedText = encodeURIComponent(message);
-    const url = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodedText}`;
+    const url = `https://t.me/avk4488?text=${encodedText}`;
 
     window.open(url, "_blank", "noopener,noreferrer");
 
     statusNode.textContent = "Сообщение подготовлено. Отправьте его в Telegram.";
     statusNode.className = "form-status success";
   });
+
 })();

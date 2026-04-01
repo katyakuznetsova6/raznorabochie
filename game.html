@@ -16,6 +16,32 @@ body {
 
 canvas {
   display: block;
+  margin: 20px auto;
+}
+
+#startScreen {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  z-index:10;
+}
+
+#startScreen button {
+  margin-top:20px;
+  padding:15px 25px;
+  font-size:16px;
+  background:#00ffc3;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 /* финальный экран */
@@ -41,6 +67,7 @@ canvas {
 #endScreen p {
   font-size: 18px;
   margin-bottom: 20px;
+  white-space: pre-line;
 }
 
 #endScreen button {
@@ -51,22 +78,52 @@ canvas {
   border: none;
   border-radius: 8px;
 }
+
+#endScreen button {
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  #endScreen button:hover {
+    transform: scale(1.05);
+  }
+
+#endScreen .cta-btn {
+  margin-top:10px;
+  background:#ff5a3c;
+  color:#fff;
+}
 </style>
 </head>
 
 <body>
+
+<div id="startScreen">
+  <h1>Собери нормальную бригаду</h1>
+  <p>
+Лови 👷 🦺 🛠️ — нормальные работники<br>
+Избегай 🍺 💤 🚬 — они пропадают<br>
+У тебя 20 секунд
+</p>
+  <button onclick="startGame()">Попробовать собрать бригаду</button>
+</div>
 
 <canvas id="game"></canvas>
 
 <div id="endScreen">
   <h1 id="endTitle"></h1>
   <p id="endText"></p>
-  <button onclick="goToForm()">Получить нормальную бригаду</button>
+  <button id="retryBtn" onclick="restartGame()">Попробовать ещё раз</button>
+  <button id="ctaBtn" class="cta-btn" onclick="goToForm()">Сделать, чтобы объект не встал</button>
+  <p id="ctaHint" style="margin-top:10px; font-size:14px; opacity:0.7;">
+    Обычно пишут, когда уже был срыв. Лучше раньше.
+  </p>
 </div>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
+const catchSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-game-ball-tap-2073.mp3");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -76,6 +133,63 @@ let workers = [];
 let score = 0;
 let time = 20;
 let gameOver = false;
+let gameMessage = "";
+let warning10Shown = false;
+let warning5Shown = false;
+let attempt = 1;
+let particles = [];
+let floatingTexts = [];
+
+function createParticles(x, y, color){
+for(let i=0;i<6;i++){
+particles.push({
+x: x,
+y: y,
+dx: (Math.random()-0.5)*3,
+dy: (Math.random()-0.5)*3,
+life: 15,
+color: color
+});
+}
+}
+
+function drawParticles(){
+particles.forEach(p=>{
+ctx.fillStyle = p.color;
+ctx.fillRect(p.x, p.y, 2, 2);
+
+p.x += p.dx;
+p.y += p.dy;
+p.life--;
+
+});
+
+particles = particles.filter(p=>p.life > 0);
+}
+
+function showScoreText(text, x, y, color){
+floatingTexts.push({
+text,
+x,
+y,
+life: 25,
+color
+});
+}
+
+function drawFloatingTexts(){
+floatingTexts.forEach(t=>{
+ctx.fillStyle = t.color;
+ctx.font = "16px Arial";
+ctx.fillText(t.text, t.x, t.y);
+
+t.y -= 0.8;
+t.life--;
+
+});
+
+floatingTexts = floatingTexts.filter(t=>t.life > 0);
+}
 
 // движение корзины
 document.addEventListener("mousemove", e => {
@@ -90,10 +204,37 @@ document.addEventListener("touchmove", e => {
 setInterval(() => {
   if(gameOver) return;
 
+  // динамическая сложность
+  let difficulty = 1 - (time / 20);
+
+  let rand = Math.random();
+  let type;
+
+  if(rand < 0.6 - difficulty * 0.3){
+    type = "good";
+  }
+  else if(rand < 0.9 - difficulty * 0.2){
+    type = "bad";
+  }
+  else{
+    type = "gold";
+  }
+
+  // редкий жесткий негатив
+  if(rand > 0.97){
+    type = "death";
+  }
+
   workers.push({
     x: Math.random() * canvas.width,
     y: -20,
-    type: Math.random() > 0.3 ? "good" : "bad"
+    type: type,
+    emoji:
+    type === "gold"
+    ? "💰"
+    : type === "good"
+    ? goodEmojis[Math.floor(Math.random() * goodEmojis.length)]
+    : badEmojis[Math.floor(Math.random() * badEmojis.length)]
   });
 }, 600);
 
@@ -109,15 +250,38 @@ setInterval(() => {
   }
 }, 1000);
 
+const goodEmojis = [
+"👷",
+"🦺",
+"🚧",
+"🔧",
+"🛠️",
+"🏗️",
+"📦"
+];
+
+const badEmojis = [
+"🍺",
+"📱",
+"💤",
+"🚬",
+"🎮",
+"💣"
+];
+
 // рисуем работников
 function drawWorker(w){
-  ctx.font = "32px Arial";
-  ctx.textAlign = "center";
+ctx.textAlign = "center";
+ctx.font = "48px Arial";
 
-  let emoji = "👷";
-  if (w.type === "bad") emoji = "📱";
+ctx.fillStyle = "#ffffff";
 
-  ctx.fillText(emoji, w.x, w.y);
+ctx.shadowColor = "rgba(0,0,0,0.9)";
+ctx.shadowBlur = 15;
+
+ctx.fillText(w.emoji, w.x, w.y);
+
+ctx.shadowBlur = 0;
 }
 
 // основной цикл
@@ -126,22 +290,78 @@ function update(){
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  // корзина (прораб)
+  const gradient = ctx.createLinearGradient(0,0,0,canvas.height);
+  gradient.addColorStop(0, "#0a0a0a");
+  gradient.addColorStop(1, "#1a1a1a");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // платформа (ловушка)
+  const basketY = canvas.height - 50;
+
+  // glow эффект
+  ctx.shadowColor = "#00ffc3";
+  ctx.shadowBlur = 20;
+
+  // сама платформа
   ctx.fillStyle = "#00ffc3";
-  ctx.fillRect(basket.x, canvas.height-60, basket.w, 12);
+  ctx.fillRect(basket.x, basketY, basket.w, 10);
+
+  // обводка
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(basket.x, basketY, basket.w, 10);
+
+  ctx.shadowBlur = 0;
+
+  // прораб над платформой
+  ctx.font = "34px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("🧑‍💼", basket.x + basket.w/2, basketY - 10);
 
   workers.forEach(w=>{
-    w.y += 3.5;
+    w.y += 5 + (attempt * 0.5);
     drawWorker(w);
 
     // ловим
     if(
-      w.y > canvas.height-60 &&
+      w.y > basketY - 10 &&
       w.x > basket.x &&
       w.x < basket.x + basket.w
     ){
-      if(w.type === "good") score +=10;
-      else score -=15;
+      if(w.type === "good"){
+      score +=10;
+      createParticles(w.x, w.y, "#00ffc3");
+      showScoreText("работает", w.x, w.y, "#00ffc3");
+      if(navigator.vibrate) navigator.vibrate(20);
+      catchSound.currentTime = 0;
+      catchSound.play();
+      }
+      else if(w.type === "bad"){
+      score -=15;
+      createParticles(w.x, w.y, "red");
+      showScoreText("пропал", w.x, w.y, "red");
+      if(navigator.vibrate) navigator.vibrate(40);
+      catchSound.currentTime = 0;
+      catchSound.play();
+      }
+      else if(w.type === "gold"){
+      score +=40;
+      createParticles(w.x, w.y, "gold");
+      showScoreText("норм бригада", w.x, w.y, "gold");
+      if(navigator.vibrate) navigator.vibrate(30);
+      catchSound.currentTime = 0;
+      catchSound.play();
+      }
+      else if(w.type === "death"){
+      score -=50;
+      createParticles(w.x, w.y, "#ff0000");
+      showScoreText("объект встал", w.x, w.y, "#ff0000");
+      if(navigator.vibrate) navigator.vibrate(60);
+      catchSound.currentTime = 0;
+      catchSound.play();
+      }
 
       w.y = canvas.height + 50;
     }
@@ -152,40 +372,146 @@ function update(){
   // интерфейс
   ctx.fillStyle = "white";
   ctx.font = "18px Arial";
-  ctx.fillText("Время: " + time, 20, 30);
-  ctx.fillText("Очки: " + score, 20, 60);
-  ctx.fillText("👷 норм | 📱 пропадёт", 20, 90);
+  ctx.textAlign = "left";
+  ctx.fillText(`Время: ${time}`, 20, 30);
+  ctx.fillText(`Очки: ${score}`, 20, 55);
+
+  if(time === 10 && !warning10Shown){
+    warning10Shown = true;
+    showMessage("Один уже не вышел...");
+  }
+
+  if(time === 5 && !warning5Shown){
+    warning5Shown = true;
+    showMessage("Минус ещё один");
+  }
+
+  if(gameMessage){
+    ctx.fillStyle = "red";
+    ctx.font = "24px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(gameMessage, canvas.width/2, 80);
+  }
+
+  drawParticles();
+  drawFloatingTexts();
 
   requestAnimationFrame(update);
 }
 
-update();
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// update();
+
+function resetGame(){
+  workers = [];
+  score = 0;
+  time = 20;
+  gameOver = false;
+  gameMessage = "";
+  warning10Shown = false;
+  warning5Shown = false;
+  particles = [];
+  floatingTexts = [];
+}
+
+function showMessage(text){
+  gameMessage = text;
+  setTimeout(()=> gameMessage = "", 1500);
+}
+
+function countdown(){
+  let count = 3;
+
+  const interval = setInterval(()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "white";
+    ctx.font = "60px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(count, canvas.width/2, canvas.height/2);
+
+    count--;
+
+    if(count < 0){
+      clearInterval(interval);
+      update();
+    }
+  }, 1000);
+}
+
+function startGame(){
+  document.getElementById("startScreen").style.display = "none";
+  resetGame();
+  countdown();
+}
 
 // финальный экран
 function showEnd(){
   const end = document.getElementById("endScreen");
   const title = document.getElementById("endTitle");
   const text = document.getElementById("endText");
+  const ctaBtn = document.getElementById("ctaBtn");
+  const ctaHint = document.getElementById("ctaHint");
 
   end.style.display = "flex";
 
   if(score < 30){
     title.innerText = "Объект встал";
-    text.innerText = "Рабочие пропали. Сроки сорваны.";
+    text.innerText =
+    "Люди пропали. Работы остановились. Сроки сдвинулись.\n\n" +
+    "Ты сейчас попробовал управлять этим вручную.\nВ реальности это ещё хуже.\n\n" +
+    "Один такой день — и ты теряешь больше, чем разница в цене.";
   } 
   else if(score < 80){
-    title.innerText = "Можно лучше";
-    text.innerText = "Часть бригады отвалилась.";
+    title.innerText = "Ты почти собрал бригаду";
+    text.innerText =
+    "Часть людей отвалилась.\nТы начал терять контроль.\n\n" +
+    "В реальности именно в этот момент всё ломается.\n\n" +
+    "Ты можешь пытаться контролировать это сам.\nИли закрыть вопрос системой.";
   } 
   else {
-    title.innerText = "Чистая работа";
-    text.innerText = "Без срывов. Как и должно быть.";
+    title.innerText = "Бригада собрана";
+    text.innerText =
+    "Ты справился.\nНо в жизни это нестабильно.\n\n" +
+    "Сегодня получилось.\nЗавтра — уже нет.\n\n" +
+    "Поэтому нормальные объекты держатся не на людях.\nА на системе.";
   }
+
+  if(attempt === 1){
+    text.innerText += "\n\nСовет: не лови всех подряд";
+  }
+
+  if(attempt === 2){
+    text.innerText += "\n\nУже второй раз пробуешь.\nВ реальности это происходит каждый день.";
+  }
+
+  text.innerText += "\n\nМы уже закрыли этот вопрос.\nТебе не нужно этим заниматься.";
+
+  if (attempt < 2) {
+    ctaBtn.style.display = "none";
+    ctaHint.style.display = "none";
+  } else {
+    ctaBtn.style.display = "inline-block";
+    ctaHint.style.display = "block";
+    ctaHint.innerText = "Можно продолжать играть.\nИли закрыть вопрос.";
+  }
+}
+
+function restartGame(){
+  attempt++;
+  document.getElementById("endScreen").style.display = "none";
+  startGame();
 }
 
 // переход в форму
 function goToForm(){
-  window.parent.location.href = "#form";
+  window.parent.postMessage('goForm', '*');
 }
 </script>
 

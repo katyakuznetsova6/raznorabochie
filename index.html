@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">К основному содержимому</a>
 
@@ -21,24 +22,16 @@
         <span class="nav-toggle-bar" aria-hidden="true"></span>
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
-      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
-        <ul class="nav-list">
-          <li><a href="#welcome" data-nav="welcome">О нас</a></li>
-          <li><a href="#services" data-nav="services">Услуги</a></li>
-          <li><a href="#calculator" data-nav="calculator">Калькулятор</a></li>
-          <li><a href="#prices" data-nav="prices">Цены</a></li>
-          <li><a href="#why" data-nav="why">Почему мы</a></li>
-          <li><a href="#faq" data-nav="faq">Вопросы</a></li>
-          <li><a href="#form" data-nav="form">Заявка</a></li>
-          <li><a href="#contacts" data-nav="contacts">Контакты</a></li>
-        </ul>
-      </nav>
+      <div class="header-center">
+        Разнорабочие под задачи любой сложности
+      </div>
       <div class="header-actions">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" title="Светлая / тёмная тема">
           <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
           <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
         </button>
-        <a href="#form" class="btn btn-header">Заказать</a>
+        <a href="#form" class="btn btn-header">Получить бригаду</a>
+        <a href="#services">Услуги разнорабочих</a>
       </div>
     </div>
   </header>
@@ -47,44 +40,121 @@
     <section class="hero" aria-label="Главный экран">
       <div class="container hero-inner">
         <p class="hero-eyebrow">Челябинск и область</p>
-        <h1>Разнорабочие без лишних слов</h1>
-        <p class="hero-lead">Грузчики, подсобники и уборка территории — от 400 ₽/час. Выезд в день обращения, договоримся по телефону или в Telegram.</p>
+    
+        <h1>Бригада, которая не пропадает на второй день</h1>
+    
+        <p class="hero-lead">
+          Работаем по Челябинску и области<br>
+          Выводим людей под задачу и держим объект в работе без простоев и срывов
+        </p>
+
+        <p class="hero-lead" style="margin-top:0;">
+          Если кто-то не вышел — спокойно заменим без остановки
+        </p>
+    
         <div class="hero-actions">
-          <a href="tel:89235029493" class="btn">Позвонить</a>
-          <a href="#form" class="btn btn-outline">Оставить заявку</a>
+          <a href="#form" class="btn">Забронировать бригаду</a>
+          <a href="tel:89235029493" class="btn btn-outline">Позвонить</a>
+        </div>
+
+        <p class="muted">Уже помогли более чем на 100 объектах</p>
+    
+        <p class="hero-sub">
+          <span>✓ Работаем с прорабами, компаниями и частными заказчиками</span>
+          <span>✓ Строительство, ремонт, участки</span>
+        </p>
+
+        <p class="muted" style="text-align:center; margin-top:12px; font-size:14px;">
+          Сейчас свободно: несколько человек на завтра
+        </p>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <h2>Знакомая ситуация?</h2>
+    
+        <ul class="advantages">
+          <li>Люди вышли — на второй день половина пропала</li>
+          <li>Каждый раз ищете рабочих заново</li>
+          <li>Приходится самому контролировать всех</li>
+          <li>Сроки начинают сдвигаться</li>
+        </ul>
+    
+        <p class="section-intro" style="margin-top:20px;">
+          Это не проблема работы.  
+          Это проблема отсутствия системы.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-block section-alt">
+      <div class="container">
+        <h2>Как мы работаем</h2>
+    
+        <div class="services">
+          <div class="card">
+            <h3>1. Принимаем задачу</h3>
+            <p>Понимаем объём, сроки и условия работы</p>
+          </div>
+    
+          <div class="card">
+            <h3>2. Подбираем бригаду</h3>
+            <p>Не случайные люди, а под конкретную задачу</p>
+          </div>
+    
+          <div class="card">
+            <h3>3. Контролируем выход</h3>
+            <p>Следим, чтобы люди реально вышли и работали</p>
+          </div>
+    
+          <div class="card">
+            <h3>4. Делаем замену</h3>
+            <p>Если кто-то выпал — быстро подменяем</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+    <section id="services" class="section-block services-bg" aria-labelledby="services-title">
       <div class="container">
-        <h2 id="welcome-title" class="visually-hidden">Коротко о сервисе</h2>
-        <ul class="welcome-chips" role="list">
-          <li class="chip">От 400 ₽/час — прозрачно</li>
-          <li class="chip">Работаем в выходные</li>
-          <li class="chip">Проверенные бригады</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="services" class="section-block" aria-labelledby="services-title">
-      <div class="container">
-        <h2 id="services-title">Услуги</h2>
+        <h2 id="services-title">Услуги разнорабочих</h2>
         <p class="section-intro">Подберём состав бригады под вашу задачу — от разовой разгрузки до нескольких смен подряд.</p>
         <div class="services">
-          <article class="card">
+          <article class="card service-card">
             <h3>Грузчики</h3>
-            <p>Переезды, разгрузка фур, склад, подъём на этаж.</p>
+            <p>Разгрузка и переезды без простоев и потери времени</p>
           </article>
-          <article class="card">
+          
+          <article class="card service-card">
             <h3>Подсобные рабочие</h3>
-            <p>Стройка, демонтаж, помощь бригаде, разнорабочие на объекте.</p>
+            <p>Усиливаем бригаду, чтобы объект не встал</p>
           </article>
-          <article class="card">
+          
+          <article class="card service-card">
+            <h3>Демонтаж</h3>
+            <p>Быстро разбираем и выносим без затягивания сроков</p>
+          </article>
+          
+          <article class="card service-card">
             <h3>Уборка территории</h3>
-            <p>Снег, мусор, подготовка участка, вывоз мелкого мусора по договорённости.</p>
+            <p>Убираем снег, мусор, чистим площадки и прилегающие территории</p>
+            <p style="margin-top:6px; font-size:14px; color:var(--muted);">Работаем не только на стройках — дворы, участки, возле магазинов, складов, кафе</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section-block cases-bg">
+      <div class="container">
+        <h2>Формат работы</h2>
+    
+        <ul class="advantages">
+          <li>Смена — 8 часов</li>
+          <li>Обычно от 2 человек</li>
+          <li>Работаем под задачу, а не “просто дали людей”</li>
+          <li>Подходит для разовых и постоянных задач</li>
+        </ul>
       </div>
     </section>
 
@@ -115,8 +185,19 @@
     <section id="prices" class="section-block" aria-labelledby="prices-title">
       <div class="container">
         <h2 id="prices-title">Цены</h2>
-        <p>Ставка <strong>от 400 до 650 ₽/час</strong> на одного работника в зависимости от задачи, срочности и условий на объекте.</p>
-        <p class="muted">Минимальное время выезда и возможные доплаты обсуждаем индивидуально.</p>
+    
+        <p>
+          Ставка от <strong>400 до 650 ₽/час</strong> на одного работника
+        </p>
+    
+        <p class="section-intro">
+          Но важнее не цена за час,  
+          а чтобы объект не встал и работа не остановилась.
+        </p>
+    
+        <p class="muted">
+          Дешёвые рабочие часто стоят дороже из-за срывов и простоев.
+        </p>
       </div>
     </section>
 
@@ -124,11 +205,73 @@
       <div class="container">
         <h2 id="why-title">Почему мы</h2>
         <ul class="advantages">
-          <li>Быстрый выезд и согласование сроков</li>
-          <li>Рабочие с опытом на подобных задачах</li>
-          <li>Работаем без выходных по договорённости</li>
-          <li>Связь по телефону, почте и Telegram</li>
+          <li>Если человек не вышел — делаем замену</li>
+          <li>Подбираем людей под конкретную задачу</li>
+          <li>Контролируем процесс, а не просто “дали рабочих”</li>
+          <li>Работаем стабильно, а не разово</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <h2>Как это работает на практике</h2>
+
+        <div class="services">
+
+          <div class="card case-card">
+            <h3>Частный дом</h3>
+            <p><strong>Задача:</strong> усилить бригаду, 4 человека</p>
+            <p>На второй день один не вышел</p>
+            <p>Через 1,5 часа уже был человек на замене</p>
+            <p><strong>Объект не остановился. Сроки не сдвинулись.</strong></p>
+          </div>
+
+          <div class="card case-card">
+            <h3>Демонтаж квартиры</h3>
+            <p><strong>Задача:</strong> демонтаж + вынос мусора</p>
+            <p>Часть бригады начала сливаться</p>
+            <p>Заменили людей в тот же день</p>
+            <p><strong>Работу закрыли без переноса сроков.</strong></p>
+          </div>
+
+          <div class="card case-card">
+            <h3>Склад</h3>
+            <p><strong>Задача:</strong> разгрузка фуры</p>
+            <p>Нужно было срочно 6 человек</p>
+            <p>Дали 6 + 1 запасного</p>
+            <p><strong>Без простоев и потери времени.</strong></p>
+          </div>
+
+        </div>
+
+        <p class="section-intro" style="margin-top:20px;">
+          Везде одна и та же проблема — люди пропадают.<br>
+          Мы решаем это системой.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-block section-alt">
+      <div class="container">
+        <h2>С нами работают, потому что спокойно</h2>
+
+        <ul class="advantages">
+          <li>Более 100 объектов</li>
+          <li>Более 500 смен</li>
+          <li>90–95% стабильный выход людей</li>
+          <li>Работаем по Челябинску и области</li>
+        </ul>
+
+        <ul class="advantages" style="margin-top:20px;">
+          <li>Если человек не вышел — делаем замену</li>
+          <li>Не оставляем объект без людей</li>
+          <li>Работаем под задачу, а не “как получится”</li>
+        </ul>
+
+        <p class="section-intro" style="margin-top:20px;">
+          Вы не рискуете — вы закрываете вопрос с рабочими
+        </p>
       </div>
     </section>
     
@@ -145,17 +288,68 @@
           Спойлер: большинство не справляются
           </p>
         <div class="game-wrapper">
-          <iframe src="./game.html"></iframe>
+          <iframe src="./game.html" loading="lazy"></iframe>
         </div>
     
         <div class="game-after">
-          <p>
-            Разница не в людях.  
-            Разница в системе.
+          <p><strong>Вот примерно так это и происходит в реальности</strong></p>
+          <p style="margin-top:16px;">
+            В реальности это стоит вам сроков и денег<br>
+            У нас это закрыто системой
           </p>
-          <a href="#form" class="btn">Получить стабильную бригаду</a>
+          <p>
+            Сначала всё нормально<br>
+            Потом кто-то не вышел<br>
+            Потом ещё кто-то
+          </p>
+          <p>И в какой-то момент объект просто встаёт</p>
+          <p style="margin-top:16px;">
+            Можно дальше искать людей самому<br>
+            А можно один раз закрыть этот вопрос
+          </p>
+          <a href="#form" class="btn">Забронировать бригаду</a>
         </div>
     
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+
+        <h2>Ты только что увидел, как это происходит</h2>
+
+        <p class="section-intro">
+          Сначала всё нормально<br>
+          Потом один не вышел<br>
+          Потом второй<br>
+          И объект просто встаёт
+        </p>
+
+        <p>
+          Скорее всего, у тебя уже была такая ситуация
+        </p>
+
+        <p>
+          Почти каждый прораб через это проходит
+        </p>
+
+        <p>
+          Разница в цене — копейки<br>
+          Потеря времени — дни
+        </p>
+
+        <div style="margin-top:20px;">
+          <a href="#form" class="btn">Сделать, чтобы объект не встал</a>
+        </div>
+
+        <p style="margin-top:10px; font-size:14px; opacity:0.7;">
+          Подскажем, сколько нужно людей и назовём точную стоимость
+        </p>
+
+        <p style="margin-top:6px; font-size:14px; opacity:0.6;">
+          Сейчас есть люди на завтра. Дальше — по загрузке
+        </p>
+
       </div>
     </section>
 
@@ -185,7 +379,8 @@
 
     <section id="form" class="section-block section-alt" aria-labelledby="form-title">
       <div class="container">
-        <h2 id="form-title">Оставить заявку</h2>
+        <h2 id="form-title">Оставьте заявку — ответим в течение 10–15 минут</h2>
+        <p class="section-intro">Напишем в Telegram или перезвоним</p>
         <p class="section-intro">Заполните поля — откроется Telegram с готовым текстом. Останется только отправить сообщение.</p>
         <form id="request-form" novalidate>
           <label for="name">Имя</label>
@@ -198,37 +393,162 @@
           <textarea id="task" name="task" placeholder="Адрес, что нужно сделать, желаемое время"></textarea>
 
           <label for="date">Удобная дата и время</label>
-          <input type="datetime-local" id="date" name="date">
+          <input type="text" id="date" name="date" placeholder="Например: завтра в 14:00">
 
           <button class="btn" type="submit">Отправить через Telegram</button>
           <p id="form-status" class="form-status" aria-live="polite"></p>
+          <p style="font-size:14px; opacity:0.7;">
+            Ответим в течение 10–15 минут  
+            Не передаём контакты третьим лицам
+          </p>
         </form>
       </div>
     </section>
 
-    <section id="contacts" class="section-block" aria-labelledby="contacts-title">
+    <section class="section-block section-alt" style="text-align:center;">
       <div class="container">
-        <h2 id="contacts-title">Контакты</h2>
-        <ul class="contact-list">
-          <li>Телефон: <a href="tel:89235029493">8 923 502-94-93</a></li>
-          <li>Email: <a href="mailto:r.rezerv74@mail.ru">r.rezerv74@mail.ru</a></li>
-          <li>Город: Челябинск</li>
-          <li>Telegram: <a href="https://t.me/avk4488" target="_blank" rel="noopener noreferrer">@avk4488</a></li>
-        </ul>
+        <h2>Если у вас объект — вам нужны не просто рабочие</h2>
+        <p class="section-intro" style="max-width:32em; margin:0 auto 16px;">
+          Нужны люди, которые выйдут и доведут работу до конца
+        </p>
+        <p style="font-size:18px; font-weight:600;">Мы как раз про это</p>
+        <div style="margin-top:20px;">
+          <a href="#form" class="btn">Забронировать бригаду</a>
+        </div>
       </div>
     </section>
+
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; <span id="year"></span> Рабочий резерв</p>
-      <a href="#main-content" class="footer-top">Наверх</a>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+  
+        <!-- Бренд -->
+        <div class="footer-brand">
+          <h3>Рабочий резерв</h3>
+          <p>Бригады без срывов и простоев</p>
+        </div>
+  
+        <!-- Навигация -->
+        <div class="footer-nav">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#calculator">Калькулятор</a></li>
+            <li><a href="#prices">Цены</a></li>
+            <li><a href="#why">Почему мы</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#game-block">Игра</a></li>
+            <li><a href="#form">Заявка</a></li>
+          </ul>
+        </div>
+  
+        <!-- Контакты -->
+        <div class="footer-contacts">
+          <h4>Контакты</h4>
+  
+          <a href="tel:89235029493" class="footer-contact">
+            <!-- phone -->
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.6.57a1 1 0 011 1v3.4a1 1 0 01-1 1C11.3 21 3 12.7 3 2.5a1 1 0 011-1H7.4a1 1 0 011 1c0 1.3.2 2.5.57 3.6a1 1 0 01-.24 1l-2.17 2.17z"/>
+            </svg>
+            <span>+7 923 502-94-93</span>
+          </a>
+  
+          <a href="https://t.me/avk4488" target="_blank" class="footer-contact">
+            <!-- telegram -->
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M9.04 15.36l-.38 5.35c.55 0 .78-.24 1.06-.53l2.54-2.43 5.27 3.86c.97.53 1.66.25 1.92-.9l3.48-16.3c.34-1.58-.57-2.2-1.52-1.85L1.5 9.4c-1.5.58-1.48 1.42-.26 1.8l5.84 1.82 13.57-8.56c.64-.42 1.22-.19.74.23"/>
+            </svg>
+            <span>Telegram</span>
+          </a>
+  
+          <a href="mailto:r.rezerv74@mail.ru" class="footer-contact">
+            <!-- mail -->
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span>r.rezerv74@mail.ru</span>
+          </a>
+  
+          <p class="footer-location">📍 Челябинск и область</p>
+  
+        </div>
+  
+      </div>
+  
+      <div class="footer-bottom">
+        <p>© Рабочий резерв</p>
+      </div>
     </div>
   </footer>
 
-  <a href="tel:89235029493" class="call-btn" aria-label="Позвонить">📞</a>
-  <a href="https://t.me/avk4488" class="tg-btn" aria-label="Написать в Telegram" target="_blank" rel="noopener noreferrer">✈</a>
+  <a href="tel:89235029493" class="call-btn" aria-label="Позвонить">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+      <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.6.57a1 1 0 011 1v3.4a1 1 0 01-1 1C11.3 21 3 12.7 3 2.5a1 1 0 011-1H7.4a1 1 0 011 1c0 1.3.2 2.5.57 3.6a1 1 0 01-.24 1l-2.17 2.17z"/>
+    </svg>
+  </a>
+  
+  <a href="https://t.me/avk4488" class="tg-btn" aria-label="Написать в Telegram">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+      <path d="M9.04 15.36l-.38 5.35c.55 0 .78-.24 1.06-.53l2.54-2.43 5.27 3.86c.97.53 1.66.25 1.92-.9l3.48-16.3c.34-1.58-.57-2.2-1.52-1.85L1.5 9.4c-1.5.58-1.48 1.42-.26 1.8l5.84 1.82 13.57-8.56c.64-.42 1.22-.19.74.23"/>
+    </svg>
+  </a>
 
   <script src="script.js"></script>
+
+<script>
+const elements = document.querySelectorAll('.section-block');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+});
+
+elements.forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
+});
+</script>
+
+<script>
+  const phoneInput = document.getElementById('phone');
+  
+  phoneInput.addEventListener('focus', () => {
+    if (!phoneInput.value) {
+      phoneInput.value = '+7 ';
+    }
+  });
+  
+  phoneInput.addEventListener('input', () => {
+    if (!phoneInput.value.startsWith('+7')) {
+      phoneInput.value = '+7';
+    }
+  });
+  </script>
+
+<script>
+  window.addEventListener('message', function(e){
+    if(e.data === 'goForm'){
+      window.location.href = '#form';
+    }
+  });
+  </script>
+
+<script>
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+
+  document.querySelectorAll(".hero, .services-bg, .cases-bg").forEach(section => {
+    section.style.backgroundPosition = "center " + (scrollY * 0.35) + "px";
+  });
+});
+</script>
+
+
 </body>
 </html>
