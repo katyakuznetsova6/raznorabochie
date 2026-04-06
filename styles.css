@@ -427,19 +427,153 @@ z-index: 2;
   gap: 20px;
 }
 
+/* «Spotlight» за курсором: золото/янтарь (локальные % — совместимо с backdrop-filter и оверлеями) */
+.glow-panel {
+  --glow-lxp: 50%;
+  --glow-lyp: 50%;
+  --glow-xp: 0.5;
+  --glow-yp: 0.5;
+  --glow-sat: 88%;
+  --glow-light: 56%;
+  --glow-size-inner: 220px;
+  --glow-size-outer: 420px;
+  /* Оттенок обновляет script.js (как glowColorMap base/spread в React-версии) */
+  --glow-hue: 62;
+}
+
+.card.glow-panel:not(.service-card):not(.case-card) {
+  background-color: rgba(255, 255, 255, 0.04);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) var(--glow-light) / 0.32),
+      transparent 70%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 72% 50% / 0.12),
+      transparent 76%
+    );
+  background-repeat: no-repeat;
+}
+
+.section-alt .card.glow-panel:not(.service-card):not(.case-card) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .card.glow-panel:not(.service-card):not(.case-card) {
+  background-color: rgba(255, 255, 255, 0.78);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) 58% / 0.22),
+      transparent 70%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 65% 48% / 0.08),
+      transparent 76%
+    );
+}
+
+.card.glow-panel:not(.service-card):not(.case-card)::after {
+  display: none;
+}
+
+.calculator.glow-panel {
+  position: relative;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) var(--glow-light) / 0.28),
+      transparent 68%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 70% 52% / 0.1),
+      transparent 74%
+    );
+  background-repeat: no-repeat;
+}
+
+[data-theme="light"] .calculator.glow-panel {
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) 52% / 0.18),
+      transparent 68%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 60% 45% / 0.07),
+      transparent 74%
+    );
+}
+
+.game-wrapper.glow-panel {
+  background-color: rgba(8, 8, 10, 0.5);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) var(--glow-light) / 0.35),
+      transparent 65%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 75% 48% / 0.12),
+      transparent 72%
+    );
+  background-repeat: no-repeat;
+}
+
+[data-theme="light"] .game-wrapper.glow-panel {
+  background-color: rgba(20, 20, 22, 0.08);
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) 52% / 0.2),
+      transparent 65%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 65% 45% / 0.08),
+      transparent 72%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-panel {
+    --glow-lxp: 50%;
+    --glow-lyp: 50%;
+  }
+
+  .card.glow-panel:not(.service-card):not(.case-card)::after {
+    display: block;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at 50% 35%,
+      rgba(255, 215, 0, 0.08),
+      transparent 50%
+    );
+  }
+}
+
 .card {
   position: relative;
-  background: rgba(255,255,255,0.04);
+  background-color: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .section-alt .card {
-  background: rgba(255,255,255,0.04);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 /* Тёмная тема по умолчанию (без data-theme) — золотое свечение как раньше */
@@ -521,6 +655,39 @@ position: relative;
 z-index: 2;
 }
 
+/* Подсветка поверх фона карточки: иначе linear-gradient в ::before полностью скрывает фон article */
+.service-card.glow-panel::before {
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) var(--glow-light) / 0.45),
+      transparent 62%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 72% 52% / 0.18),
+      transparent 72%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85));
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+.case-card.glow-panel::before {
+  background-image:
+    radial-gradient(
+      var(--glow-size-inner) var(--glow-size-inner) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) var(--glow-sat) var(--glow-light) / 0.5),
+      transparent 60%
+    ),
+    radial-gradient(
+      var(--glow-size-outer) var(--glow-size-outer) at var(--glow-lxp) var(--glow-lyp),
+      hsl(var(--glow-hue) 72% 52% / 0.2),
+      transparent 70%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9));
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
 .services-bg {
 position: relative;
 z-index: 0;
@@ -580,7 +747,7 @@ z-index: 2;
   padding: 24px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background-color: var(--bg);
 }
 
 .calc-row {
@@ -638,6 +805,224 @@ z-index: 2;
   padding-left: 20px;
   display: grid;
   gap: 10px;
+}
+
+/* --- Отзывы: scroll-linked «улёт» карточек (как в motion/react + scroll) --- */
+.reviews-section {
+  position: relative;
+  scroll-margin-top: 120px;
+}
+
+.reviews-track {
+  position: relative;
+  /* Длинная дорожка — карточки сменяются медленнее при скролле */
+  min-height: 220vh;
+  margin-top: 0;
+  overflow: visible;
+}
+
+.reviews-track .container.reviews-sticky-inner {
+  position: -webkit-sticky;
+  position: sticky;
+  /* Заголовок + вводка остаются в зоне видимости; не уезжают под самый край */
+  top: max(96px, calc(env(safe-area-inset-top, 0px) + 76px), 10vh);
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: min(1200px, 100%);
+  max-width: min(680px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px))
+    max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+
+.reviews-sticky-inner #reviews-title,
+.reviews-sticky-inner .reviews-intro {
+  flex-shrink: 0;
+}
+
+.reviews-sticky-inner .reviews-intro {
+  margin-bottom: 6px;
+}
+
+.reviews-stack {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 12px auto 0;
+  flex-shrink: 0;
+  min-height: min(400px, 52vh);
+  perspective: 1100px;
+  perspective-origin: 50% 30%;
+  transform-style: preserve-3d;
+  /* Вертикальный скролл страницы при жесте на колоде */
+  touch-action: pan-y;
+}
+
+.review-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 22px 24px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(24, 24, 26, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 215, 0, 0.08) inset;
+  transform-origin: center top;
+  will-change: transform;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.25));
+  opacity: 1;
+}
+
+/* Прозрачность текста задаётся из JS (кроссфейд при уходе верхней карточки) */
+.review-card .review-stars,
+.review-card .review-quote,
+.review-card .review-meta {
+  opacity: var(--review-text-op, 0);
+  transition: opacity 0.14s ease;
+  pointer-events: none;
+}
+
+.review-card:last-child {
+  margin-bottom: 0;
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 1.15rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.review-star {
+  display: inline-block;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+.review-quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.review-quote p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.review-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.review-role {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+[data-theme="light"] .review-card {
+  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(201, 160, 0, 0.15) inset;
+}
+
+[data-theme="light"] .review-meta {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .reviews-section {
+    scroll-margin-top: max(104px, calc(env(safe-area-inset-top, 0px) + 84px));
+  }
+
+  .reviews-track {
+    min-height: 200vh;
+  }
+
+  .reviews-track .container.reviews-sticky-inner {
+    top: max(92px, calc(env(safe-area-inset-top, 0px) + 72px), 9vh);
+    max-width: min(640px, 100%);
+  }
+
+  .reviews-stack {
+    max-width: 100%;
+    min-height: min(360px, 48vh);
+    margin-top: 10px;
+    perspective: 900px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track {
+    min-height: 0;
+  }
+
+  .reviews-track .container.reviews-sticky-inner {
+    position: relative;
+    top: auto;
+    display: block;
+    max-width: min(680px, 100%);
+    padding-inline: max(16px, env(safe-area-inset-left, 0px))
+      max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  .reviews-stack {
+    min-height: 0;
+    max-width: 640px;
+  }
+
+  .review-card {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    filter: none;
+    transition: none;
+    width: 100%;
+    margin: 0 0 16px;
+    padding: 22px 22px 20px;
+  }
+
+  .review-card .review-stars,
+  .review-card .review-quote,
+  .review-card .review-meta {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .review-quote p {
+    font-size: 16px;
+  }
 }
 
 .faq-list {
@@ -849,7 +1234,7 @@ textarea {
   }
 
   .site-nav.is-open {
-    max-height: min(380px, 70vh);
+    max-height: min(520px, 82vh);
   }
 
   .site-nav .nav-list {
@@ -925,8 +1310,15 @@ textarea {
   .card {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    background: rgba(255, 255, 255, 0.06);
     padding: 16px;
+  }
+
+  .card:not(.glow-panel) {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .card.glow-panel {
+    background-color: rgba(255, 255, 255, 0.06);
   }
 
   .card:hover {
@@ -1312,5 +1704,23 @@ margin-left: 4px;
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  .footer-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 20px;
+    align-items: start;
+  }
+
+  .footer-nav li {
+    margin-bottom: 6px;
+  }
+
+  .footer-nav a {
+    display: block;
+    padding: 6px 0;
+    font-size: 15px;
+    line-height: 1.35;
   }
 }

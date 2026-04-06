@@ -42,6 +42,7 @@
           <li><a href="#game-block" data-nav="game-block">Игра</a></li>
           <li><a href="#faq" data-nav="faq">Вопросы</a></li>
           <li><a href="#form" data-nav="form">Заявка</a></li>
+          <li><a href="#reviews" data-nav="reviews">Отзывы</a></li>
         </ul>
       </nav>
     </div>
@@ -104,22 +105,22 @@
         <h2>Как мы работаем</h2>
     
         <div class="services">
-          <div class="card">
+          <div class="card glow-panel">
             <h3>1. Принимаем задачу</h3>
             <p>Понимаем объём, сроки и условия работы</p>
           </div>
     
-          <div class="card">
+          <div class="card glow-panel">
             <h3>2. Подбираем бригаду</h3>
             <p>Не случайные люди, а под конкретную задачу</p>
           </div>
     
-          <div class="card">
+          <div class="card glow-panel">
             <h3>3. Контролируем выход</h3>
             <p>Следим, чтобы люди реально вышли и работали</p>
           </div>
     
-          <div class="card">
+          <div class="card glow-panel">
             <h3>4. Делаем замену</h3>
             <p>Если кто-то выпал — быстро подменяем</p>
           </div>
@@ -132,22 +133,22 @@
         <h2 id="services-title">Услуги разнорабочих</h2>
         <p class="section-intro">Подберём состав бригады под вашу задачу — от разовой разгрузки до нескольких смен подряд.</p>
         <div class="services">
-          <article class="card service-card">
+          <article class="card service-card glow-panel">
             <h3>Грузчики</h3>
             <p>Разгрузка и переезды без простоев и потери времени</p>
           </article>
           
-          <article class="card service-card">
+          <article class="card service-card glow-panel">
             <h3>Подсобные рабочие</h3>
             <p>Усиливаем бригаду, чтобы объект не встал</p>
           </article>
           
-          <article class="card service-card">
+          <article class="card service-card glow-panel">
             <h3>Демонтаж</h3>
             <p>Быстро разбираем и выносим без затягивания сроков</p>
           </article>
           
-          <article class="card service-card">
+          <article class="card service-card glow-panel">
             <h3>Уборка территории</h3>
             <p>Убираем снег, мусор, чистим площадки и прилегающие территории</p>
             <p style="margin-top:6px; font-size:14px; color:var(--muted);">Работаем не только на стройках — дворы, участки, возле магазинов, складов, кафе</p>
@@ -173,7 +174,7 @@
       <div class="container">
         <h2 id="calc-title">Калькулятор стоимости</h2>
         <p class="section-intro">Ориентировочная сумма за выбранное число часов. Итоговая цена зависит от сложности — уточним по телефону.</p>
-        <div class="calculator" id="price-calculator">
+        <div class="calculator glow-panel" id="price-calculator">
           <div class="calc-row">
             <label for="calc-hours">Часов работы</label>
             <input type="number" id="calc-hours" name="calc-hours" min="1" max="720" value="4" inputmode="numeric">
@@ -230,7 +231,7 @@
 
         <div class="services">
 
-          <div class="card case-card">
+          <div class="card case-card glow-panel">
             <h3>Частный дом</h3>
             <p><strong>Задача:</strong> усилить бригаду, 4 человека</p>
             <p>На второй день один не вышел</p>
@@ -238,7 +239,7 @@
             <p><strong>Объект не остановился. Сроки не сдвинулись.</strong></p>
           </div>
 
-          <div class="card case-card">
+          <div class="card case-card glow-panel">
             <h3>Демонтаж квартиры</h3>
             <p><strong>Задача:</strong> демонтаж + вынос мусора</p>
             <p>Часть бригады начала сливаться</p>
@@ -246,7 +247,7 @@
             <p><strong>Работу закрыли без переноса сроков.</strong></p>
           </div>
 
-          <div class="card case-card">
+          <div class="card case-card glow-panel">
             <h3>Склад</h3>
             <p><strong>Задача:</strong> разгрузка фуры</p>
             <p>Нужно было срочно 6 человек</p>
@@ -285,7 +286,7 @@
         </p>
       </div>
     </section>
-    
+
     <section id="game-block" class="section-block">
       <div class="container">
     
@@ -298,7 +299,7 @@
         <p style="color:#ff3b3b; font-weight:600;">
           Спойлер: большинство не справляются
           </p>
-        <div class="game-wrapper">
+        <div class="game-wrapper glow-panel">
           <iframe src="./game.html" loading="lazy"></iframe>
         </div>
     
@@ -429,6 +430,115 @@
       </div>
     </section>
 
+    <section id="reviews" class="section-block reviews-section" aria-labelledby="reviews-title">
+      <div class="reviews-track" id="reviews-track">
+        <div class="container reviews-sticky-inner">
+        <h2 id="reviews-title">Отзывы заказчиков</h2>
+        <p class="section-intro reviews-intro">
+          Коротко о том, что важно на объекте: выход, замена и спокойствие
+        </p>
+        <div class="reviews-stack" id="reviews-stack">
+          <article class="review-card">
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+            </div>
+            <blockquote class="review-quote">
+              <p>
+                Вывели людей под задачу, одного заменили без простоя — как и обещали.
+                Объект не встал, с таким сейчас редкость.
+              </p>
+            </blockquote>
+            <footer class="review-meta">
+              <span class="review-name">Алексей</span>
+              <span class="review-role">прораб, частный дом</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+            </div>
+            <blockquote class="review-quote">
+              <p>
+                Нужны были грузчики срочно на склад. Приехали вовремя, без отговорок и «завтра разберёмся».
+                Так работают не все.
+              </p>
+            </blockquote>
+            <footer class="review-meta">
+              <span class="review-name">ООО «Транзит»</span>
+              <span class="review-role">разгрузка, Челябинск</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+            </div>
+            <blockquote class="review-quote">
+              <p>
+                Долго искали нормальных разнорабочих. Здесь человек не пропал на второй день — для нас это уже большой плюс.
+              </p>
+            </blockquote>
+            <footer class="review-meta">
+              <span class="review-name">Марина</span>
+              <span class="review-role">ремонт квартиры</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+            </div>
+            <blockquote class="review-quote">
+              <p>
+                Работаем на монолите — людей подменять некому. Здесь держат слово: не вышел — подтянули другого, без отмазок.
+              </p>
+            </blockquote>
+            <footer class="review-meta">
+              <span class="review-name">Дмитрий</span>
+              <span class="review-role">прораб, жилой комплекс</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+              <span class="review-star" aria-hidden="true">★</span>
+            </div>
+            <blockquote class="review-quote">
+              <p>
+                Заказывали уборку территории после подрядчика — привезли людей в срок, сделали без напоминаний. Так и хочется работать дальше.
+              </p>
+            </blockquote>
+            <footer class="review-meta">
+              <span class="review-name">ИП Сергеев</span>
+              <span class="review-role">участок, Миасс</span>
+            </footer>
+          </article>
+        </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -449,9 +559,10 @@
             <li><a href="#calculator">Калькулятор</a></li>
             <li><a href="#prices">Цены</a></li>
             <li><a href="#why">Почему мы</a></li>
-            <li><a href="#faq">FAQ</a></li>
             <li><a href="#game-block">Игра</a></li>
+            <li><a href="#faq">Вопросы</a></li>
             <li><a href="#form">Заявка</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
           </ul>
         </div>
   
