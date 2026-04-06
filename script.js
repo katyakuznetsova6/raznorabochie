@@ -121,10 +121,12 @@
    */
   let reviewsHoverInStack = false;
   let reviewsFingerOnStack = false;
+  /** Пока дорожка отзывов в viewport — листаем колоду от скролла (иначе внизу страницы без hover/тача анимация «замирает»). */
+  let reviewsTrackInView = false;
   let reviewsPLast = 0;
 
   function reviewsStackEngaged() {
-    return reviewsHoverInStack || reviewsFingerOnStack;
+    return reviewsHoverInStack || reviewsFingerOnStack || reviewsTrackInView;
   }
 
   function updateReviewsScroll() {
@@ -249,6 +251,19 @@
     }
     window.addEventListener("scroll", onReviewsScroll, { passive: true });
     window.addEventListener("resize", onReviewsScroll);
+
+    if ("IntersectionObserver" in window) {
+      const reviewsVisibilityObserver = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          reviewsTrackInView = Boolean(e && e.isIntersecting);
+          updateReviewsScroll();
+        },
+        { threshold: [0, 0.02, 0.08] }
+      );
+      reviewsVisibilityObserver.observe(reviewsTrack);
+    }
+
     if (reviewsStack) {
       reviewsStack.addEventListener("mouseenter", () => {
         reviewsHoverInStack = true;
