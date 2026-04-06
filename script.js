@@ -78,6 +78,7 @@
     "calculator",
     "prices",
     "why",
+    "game-block",
     "faq",
     "form",
     "contacts"

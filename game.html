@@ -93,6 +93,44 @@ canvas {
   background:#ff5a3c;
   color:#fff;
 }
+
+#startScreen,
+#endScreen {
+  padding: max(16px, env(safe-area-inset-top, 0px))
+    max(20px, env(safe-area-inset-right, 0px))
+    max(16px, env(safe-area-inset-bottom, 0px))
+    max(20px, env(safe-area-inset-left, 0px));
+  box-sizing: border-box;
+}
+
+#startScreen h1,
+#startScreen p,
+#endScreen h1,
+#endScreen p {
+  max-width: 22em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#startScreen button,
+#endScreen button {
+  max-width: calc(100vw - 40px);
+}
+
+@media (max-width: 480px) {
+  #startScreen h1,
+  #endScreen h1 {
+    font-size: 22px;
+  }
+
+  #endScreen p {
+    font-size: 15px;
+  }
+
+  #endScreen button {
+    width: min(100%, 300px);
+  }
+}
 </style>
 </head>
 
