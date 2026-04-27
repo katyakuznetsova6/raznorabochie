@@ -671,7 +671,629 @@ window.addEventListener("scroll", () => {
   });
 });
 </script>
+<!-- Подключение Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+  // Инициализация Supabase
+  const { createClient } = supabase
+  const supabaseUrl = 'https://jlgqxbkxmrjyfaxdaarq.supabase.co'
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsZ3F4Ymt4bXJqeWZheGRhYXJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE5MjgsImV4cCI6MjA5Mjg2NzkyOH0.Ae0VWzvDwjQ-IBFEGa3A45ih2sLB-inLoXRxNWfVd-8'
+  const supabaseClient = createClient(supabaseUrl, supabaseKey)
 
+  // Обработка формы
+  const form = document.getElementById('request-form')
+  const formStatus = document.getElementById('form-status')
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault()
+    
+    const formData = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      service: document.getElementById('task').value,
+      status: 'new'
+    }
+
+    formStatus.textContent = 'Отправляем...'
+
+    try {
+      const { data, error } = await supabaseClient
+        .from('orders')
+        .insert([formData])
+
+      if (error) {
+        throw error
+      }
+
+      formStatus.textContent = '✅ Заявка отправлена! Сейчас свяжемся с вами.'
+      form.reset()
+      
+      // Открываем Telegram (как у тебя сейчас работает)
+      const tgText = `Новая заявка:%0AИмя: ${formData.name}%0AТелефон: ${formData.phone}%0AЗадача: ${formData.service}`
+      window.open(`https://t.me/avk4488?text=${tgText}`, '_blank')
+      
+    } catch (error) {
+      console.error('Ошибка:', error)
+      formStatus.textContent = '❌ Произошла ошибка. Попробуйте ещё раз или позвоните.'
+    }
+  })
+</script>
+
+<!-- Кнопка чата -->
+<button id="chat-toggle" class="chat-toggle" aria-label="Открыть чат">
+  💬
+</button>
+
+<!-- Окно чата -->
+<div id="chat-window" class="chat-window" style="display: none;">
+  <div class="chat-header">
+    <h3>Помощник</h3>
+    <button id="chat-close" class="chat-close">×</button>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Задайте вопрос..." autocomplete="off">
+    <button id="chat-apply" class="chat-apply" type="button" title="Заполнить форму заявки из диалога">📝</button>
+    <button id="chat-send" class="chat-send">➤</button>
+  </div>
+</div>
+
+<!-- Стили чата -->
+<style>
+  .chat-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ffd700;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+    z-index: 9999;
+    transition: transform 0.3s;
+  }
+  .chat-toggle:hover { transform: scale(1.1); }
+  
+  .chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    max-height: 500px;
+    background: #16213e;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.4);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #0f3460;
+  }
+  
+  .chat-header {
+    background: #0f3460;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a2e;
+  }
+  .chat-header h3 { margin: 0; color: #ffd700; font-size: 16px; }
+  .chat-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+  }
+  .chat-close:hover { color: #e94560; }
+  
+  .chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 350px;
+  }
+  
+  .chat-message {
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .chat-message.bot {
+    background: #0f3460;
+    color: #fff;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-message.user {
+    background: #ffd700;
+    color: #1a1a2e;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .chat-input-area {
+    padding: 15px;
+    background: #0f3460;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #1a1a2e;
+  }
+  .chat-input-area input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #1a1a2e;
+    border-radius: 20px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+  .chat-input-area input::placeholder { color: #666; }
+  .chat-send {
+    background: #ffd700;
+    color: #1a1a2e;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+  .chat-send:hover { transform: scale(1.1); }
+  .chat-apply {
+    background: #00d9a3;
+    color: #0c2230;
+    border: none;
+    min-width: 44px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0 12px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .chat-apply:hover { transform: translateY(-1px); }
+  .chat-apply:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  @media (max-width: 768px) {
+    .chat-window {
+      width: calc(100% - 40px);
+      right: 20px;
+      bottom: 100px;
+    }
+    .chat-toggle {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+    }
+  }
+</style>
+
+<!-- Скрипт чата с Google Gemini -->
+<script>
+  (function() {
+    // ============================================
+    // GEMINI API KEY (Google AI Studio)
+    // ============================================
+    const GEMINI_API_KEY = 'AIzaSyDENgm4CT_fWphHnLvDSY1H_6gSFLlGx88'
+
+    // Модели по приоритету: сначала быстрая lite, при отказе — основная flash
+    const MODELS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-flash-latest']
+    const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
+
+    // Системная инструкция: всё, что бот должен знать о бизнесе
+    const SYSTEM_INSTRUCTION = `Ты — онлайн-консультант сервиса «Рабочий резерв» (Челябинск и область).
+Твоя цель: провести полноценную консультацию, снять возражения и довести клиента до оформления заявки.
+
+Факты о сервисе (используй только их, не выдумывай):
+• Услуги: разнорабочие, подсобники, грузчики, демонтаж, уборка территории, разгрузка фур.
+• Ставка: 400–650 ₽/час за одного работника, итог зависит от задачи и сложности.
+• Смена: 8 часов, обычно вывод от 2 человек.
+• Сроки: чаще следующий день, при загрузке возможно день в день. Сейчас есть свободные люди на завтра.
+• Если человек не вышел — делаем замену без остановки объекта.
+• Опыт: 100+ объектов, 500+ смен, стабильный выход 90–95%.
+• Работаем с частными клиентами, прорабами, ИП и ООО, предоставляем документы.
+• Ночные/праздничные смены — по договоренности, могут влиять на ставку.
+• Можно только труд, без транспорта.
+• Контакты: телефон/Telegram +7 923 502-94-93.
+• Оформление: через форму «Заявка» на сайте (открывается Telegram с готовым текстом).
+
+Стиль и поведение:
+• Отвечай по-человечески, без шаблонов и канцелярита, на «вы».
+• Не здоровайся повторно: приветствие только в самом первом сообщении чата.
+• Пиши кратко: обычно 1–3 коротких предложения.
+• Давай конкретику по вопросу клиента (цена, сроки, формат работы, документы, что входит).
+• Если данных не хватает, задавай максимум 1 приоритетный уточняющий вопрос за сообщение.
+• Приоритет уточнений: сначала точный адрес объекта, затем контакты и детали объема.
+• Используй слово «адрес», не подменяй его «районом», если клиент уже описал задачу.
+• После консультации делай четкий next step: предложи оставить заявку через форму и коротко подскажи, что указать.
+• На менеджера переводи только в двух случаях:
+  1) клиент сам просит связать с менеджером/звонок;
+  2) консультацию действительно невозможно завершить без доп. согласования.
+• Не отправляй к менеджеру «по умолчанию» и не обрывай консультацию фразами типа «уточнит менеджер».
+• Не упоминай, что ты ИИ или Gemini.
+• Формат: никаких длинных абзацев; если нужен список — максимум 2 пункта.
+• Пример тона:
+  Клиент: «нужны грузчики на послезавтра, перевезти диван к 12:00».
+  Ответ: «Да, поможем. Подскажите точный адрес, куда нужно привезти диван к 12:00 — после этого сразу сориентирую по людям и стоимости».`
+
+    const chatToggle = document.getElementById('chat-toggle')
+    const chatWindow = document.getElementById('chat-window')
+    const chatClose = document.getElementById('chat-close')
+    const chatMessages = document.getElementById('chat-messages')
+    const chatInput = document.getElementById('chat-input')
+    const chatSend = document.getElementById('chat-send')
+    const chatApply = document.getElementById('chat-apply')
+
+    let isWaitingForResponse = false
+    // История диалога для памяти контекста (массив { role, parts })
+    const history = []
+    const HISTORY_LIMIT = 12
+    // Контекст заявки (мини-воронка): собираем ключевые параметры из диалога
+    const leadContext = {
+      task: '',
+      location: '',
+      startTime: '',
+      people: '',
+      duration: ''
+    }
+
+    function firstMatch(text, patterns) {
+      for (const p of patterns) {
+        const m = text.match(p)
+        if (m && m[1]) return m[1].trim()
+      }
+      return ''
+    }
+
+    function updateLeadContextFromMessage(text) {
+      const src = text || ''
+      const lower = src.toLowerCase()
+
+      if (!leadContext.people) {
+        const people = firstMatch(lower, [
+          /(\d{1,2})\s*(?:чел|человек|чел\.|рабоч|грузчик)/i,
+          /нужно\s*(\d{1,2})/i
+        ])
+        if (people) leadContext.people = `${people} чел`
+      }
+
+      if (!leadContext.duration) {
+        const duration = firstMatch(lower, [
+          /(\d{1,3})\s*(?:час|часа|часов)/i,
+          /(\d{1,2})\s*(?:смен|смены)/i
+        ])
+        if (duration) {
+          leadContext.duration = /смен/.test(lower) ? `${duration} смен` : `${duration} ч`
+        }
+      }
+
+      if (!leadContext.startTime) {
+        if (lower.includes('сегодня')) leadContext.startTime = 'сегодня'
+        else if (lower.includes('завтра')) leadContext.startTime = 'завтра'
+        else {
+          const start = firstMatch(src, [
+            /(?:на|к)\s+(\d{1,2}[.\-/]\d{1,2}(?:[.\-/]\d{2,4})?)/i,
+            /(?:в|к)\s+(\d{1,2}:\d{2})/i
+          ])
+          if (start) leadContext.startTime = start
+        }
+      }
+
+      if (!leadContext.location) {
+        const location = firstMatch(src, [
+          /(?:адрес|район|объект)\s*[:\-]?\s*([^\n,.!?]{3,60})/i,
+          /(?:в|на)\s+(челябинск[^\n,.!?]{0,40}|[А-ЯA-ZЁ][^\n,.!?]{2,40})/i
+        ])
+        if (location && !/день|час|смен|руб|цен/i.test(location)) {
+          leadContext.location = location
+        }
+      }
+
+      if (!leadContext.task) {
+        const task = firstMatch(src, [
+          /(?:нужно|задача|работы)\s*[:\-]?\s*([^\n]{8,120})/i,
+          /(разгрузк[^\n,.!?]{0,80}|демонтаж[^\n,.!?]{0,80}|переезд[^\n,.!?]{0,80}|уборк[^\n,.!?]{0,80}|подсобн[^\n,.!?]{0,80}|грузчик[^\n,.!?]{0,80})/i
+        ])
+        if (task) leadContext.task = task
+      }
+    }
+
+    function getMissingLeadFields() {
+      const missing = []
+      if (!leadContext.task) missing.push('что нужно сделать')
+      if (!leadContext.location) missing.push('где объект (адрес/район)')
+      if (!leadContext.startTime) missing.push('когда нужен старт')
+      if (!leadContext.people) missing.push('сколько людей нужно')
+      if (!leadContext.duration) missing.push('на сколько часов/смен')
+      return missing
+    }
+
+    function leadReadinessScore() {
+      let score = 0
+      if (leadContext.task) score += 1
+      if (leadContext.location) score += 1
+      if (leadContext.startTime) score += 1
+      if (leadContext.people) score += 1
+      if (leadContext.duration) score += 1
+      return score
+    }
+
+    function updateApplyButtonState() {
+      if (!chatApply) return
+      // Даем оформить заявку уже при базовом наборе данных
+      chatApply.disabled = leadReadinessScore() < 2
+    }
+
+    function buildLeadTextForForm() {
+      const lines = []
+      if (leadContext.task) lines.push(`Задача: ${leadContext.task}`)
+      if (leadContext.location) lines.push(`Локация: ${leadContext.location}`)
+      if (leadContext.people) lines.push(`Людей: ${leadContext.people}`)
+      if (leadContext.duration) lines.push(`Длительность: ${leadContext.duration}`)
+      return lines.join('\n')
+    }
+
+    function applyLeadToForm() {
+      const form = document.getElementById('request-form')
+      const taskEl = document.getElementById('task')
+      const dateEl = document.getElementById('date')
+      const phoneEl = document.getElementById('phone')
+      if (!form || !taskEl || !dateEl) return
+
+      const payload = buildLeadTextForForm()
+      if (payload) taskEl.value = payload
+      if (leadContext.startTime) dateEl.value = leadContext.startTime
+
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      setTimeout(() => {
+        if (phoneEl) phoneEl.focus()
+      }, 450)
+      addBotMessage('📝 Черновик заявки заполнен из диалога. Проверьте телефон и при необходимости допишите детали, затем нажмите «Отправить через Telegram».')
+      chatWindow.style.display = 'none'
+    }
+
+    function buildUserPrompt(userText) {
+      const missing = getMissingLeadFields()
+      const known = [
+        `задача: ${leadContext.task || 'не указана'}`,
+        `локация: ${leadContext.location || 'не указана'}`,
+        `старт: ${leadContext.startTime || 'не указан'}`,
+        `людей: ${leadContext.people || 'не указано'}`,
+        `длительность: ${leadContext.duration || 'не указана'}`
+      ].join('; ')
+
+      return [
+        `Сообщение клиента: "${userText}"`,
+        `Текущий контекст заявки: ${known}.`,
+        'Важно по стилю: не начинай ответ с приветствия, если диалог уже идет; ответ короткий и живой.',
+        missing.length
+          ? `Не хватает данных: ${missing.join(', ')}. Дай консультацию и задай ровно 1 самый важный уточняющий вопрос (приоритет: адрес).`
+          : 'Данных достаточно: проконсультируй и мягко веди к оформлению заявки через форму.'
+      ].join('\n')
+    }
+
+    chatToggle.addEventListener('click', () => {
+      chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none'
+      if (chatWindow.style.display === 'flex') {
+        chatInput.focus()
+        if (chatMessages.children.length === 0) {
+          addBotMessage('Здравствуйте! 👋 Я помощник сервиса «Рабочий резерв». Чем могу помочь?')
+          setTimeout(() => {
+            addBotMessage('Могу рассказать про цены, сроки, услуги или помочь оставить заявку.')
+          }, 600)
+        }
+      }
+    })
+
+    chatClose.addEventListener('click', () => {
+      chatWindow.style.display = 'none'
+    })
+
+    chatSend.addEventListener('click', sendMessage)
+    if (chatApply) {
+      chatApply.addEventListener('click', applyLeadToForm)
+      updateApplyButtonState()
+    }
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage()
+    })
+
+    async function sendMessage() {
+      const text = chatInput.value.trim()
+      if (!text || isWaitingForResponse) return
+
+      addUserMessage(text)
+      updateLeadContextFromMessage(text)
+      updateApplyButtonState()
+      chatInput.value = ''
+      isWaitingForResponse = true
+      chatSend.disabled = true
+
+      const loadingId = addLoadingMessage()
+
+      try {
+        const response = await getGeminiResponse(buildUserPrompt(text))
+        const finalResponse = sanitizeBotResponse(response)
+        removeMessage(loadingId)
+        addBotMessage(finalResponse)
+        // Добавляем в историю только успешные пары
+        history.push({ role: 'user', parts: [{ text: buildUserPrompt(text) }] })
+        history.push({ role: 'model', parts: [{ text: finalResponse }] })
+        // Ограничиваем длину истории, чтобы не раздувать запрос
+        while (history.length > HISTORY_LIMIT) history.shift()
+      } catch (error) {
+        console.error('Ошибка Gemini:', error)
+        removeMessage(loadingId)
+        addBotMessage(sanitizeBotResponse(getFallbackResponse(text)))
+      } finally {
+        isWaitingForResponse = false
+        chatSend.disabled = false
+        chatInput.focus()
+      }
+    }
+
+    function addUserMessage(text) {
+      const div = document.createElement('div')
+      div.className = 'chat-message user'
+      div.textContent = text
+      chatMessages.appendChild(div)
+      chatMessages.scrollTop = chatMessages.scrollHeight
+    }
+
+    function addBotMessage(text) {
+      const div = document.createElement('div')
+      div.className = 'chat-message bot'
+      div.textContent = text
+      chatMessages.appendChild(div)
+      chatMessages.scrollTop = chatMessages.scrollHeight
+    }
+
+    function sanitizeBotResponse(rawText) {
+      let text = String(rawText || '').trim()
+      if (!text) {
+        return 'Подскажите, пожалуйста, точный адрес и когда нужен выход — сразу сориентирую.'
+      }
+
+      const hasDialogStarted = chatMessages.children.length > 1
+      if (hasDialogStarted) {
+        text = text.replace(/^(здравствуйте|добрый\s+день|добрый\s+вечер|привет)\s*[!.,\s-]*/i, '')
+      }
+
+      text = text
+        .replace(/чтобы\s+рассчитать\s+точную\s+стоимость[^.?!]*[.?!]?/gi, '')
+        .replace(/как\s+только\s+получим\s+уточнения[^.?!]*[.?!]?/gi, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim()
+
+      text = text
+        .replace(/уточните,\s*пожалуйста,\s*район/gi, 'подскажите, пожалуйста, точный адрес')
+        .replace(/какой\s+район/gi, 'какой точный адрес')
+
+      const sentences = (text.match(/[^.!?]+[.!?]?/g) || [text])
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .slice(0, 3)
+      text = sentences.join(' ').trim()
+
+      if (text.length > 360) text = `${text.slice(0, 357).trim()}...`
+      return text || 'Подскажите точный адрес и когда нужен выход — после этого сразу сориентирую.'
+    }
+
+    function addLoadingMessage() {
+      const id = 'loading-' + Date.now()
+      const div = document.createElement('div')
+      div.className = 'chat-message bot'
+      div.id = id
+      div.textContent = 'Печатает…'
+      chatMessages.appendChild(div)
+      chatMessages.scrollTop = chatMessages.scrollHeight
+      return id
+    }
+
+    function removeMessage(id) {
+      const el = document.getElementById(id)
+      if (el) el.remove()
+    }
+
+    async function getGeminiResponse(userMessage) {
+      const body = {
+        systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+        contents: [
+          ...history,
+          { role: 'user', parts: [{ text: userMessage }] }
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          topP: 0.9,
+          maxOutputTokens: 256
+        },
+        safetySettings: [
+          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
+          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
+          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_ONLY_HIGH' },
+          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_ONLY_HIGH' }
+        ]
+      }
+
+      let lastError = null
+      for (const model of MODELS) {
+        try {
+          const url = `${API_BASE}/${model}:generateContent?key=${GEMINI_API_KEY}`
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          })
+          if (!response.ok) {
+            const errText = await response.text()
+            console.warn(`⚠️ ${model} → HTTP ${response.status}: ${errText.slice(0, 200)}`)
+            lastError = new Error(`${model}: HTTP ${response.status}`)
+            // 429/503 — пробуем следующую модель
+            if (response.status === 429 || response.status === 503) continue
+            // Для прочих ошибок тоже пробуем следующую модель
+            continue
+          }
+          const data = await response.json()
+          const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join(' ').trim()
+          if (text) {
+            console.log(`✅ Ответ от ${model}`)
+            return text
+          }
+          lastError = new Error(`${model}: пустой ответ`)
+        } catch (err) {
+          console.warn(`⚠️ ${model} ошибка:`, err.message)
+          lastError = err
+        }
+      }
+      throw lastError || new Error('Все модели недоступны')
+    }
+
+    function getFallbackResponse(message) {
+      const msg = (message || '').toLowerCase()
+      const missing = getMissingLeadFields()
+      if (msg.includes('цена') || msg.includes('стоимост') || msg.includes('сколько')) {
+        return `💰 Базово ориентируйтесь на 400–650 ₽/час за человека. Для точнее расчета нужны детали: ${missing.slice(0, 2).join(' и ') || 'задача и объем работ'}.`
+      }
+      if (msg.includes('срок') || msg.includes('быстро') || msg.includes('когда') || msg.includes('завтра')) {
+        return '⏱️ Обычно выводим людей на следующий день, при текущей загрузке иногда можем день в день. Если подскажете район и сколько человек нужно, сориентирую по самому реальному времени старта.'
+      }
+      if (msg.includes('грузчик') || msg.includes('разгруз') || msg.includes('переезд')) {
+        return '📦 Да, с грузчиками работаем: разгрузка, переезды, складские задачи. Подберем состав под ваш объем — скажите, что разгружаем/переносим и сколько примерно часов работы.'
+      }
+      if (msg.includes('ип') || msg.includes('ооо') || msg.includes('юрлиц') || msg.includes('документ')) {
+        return '💼 Да, работаем с ИП и ООО, документы предоставляем. Можем закрывать как разовые задачи, так и регулярные смены.'
+      }
+      if (msg.includes('заявк') || msg.includes('заказ') || msg.includes('забронировать') || msg.includes('бригад')) {
+        return '📝 Отлично, оформляем. Откройте раздел «Заявка» на сайте: там откроется Telegram с готовым текстом. Укажите задачу, адрес/район, когда нужен старт и сколько людей — это ускорит подтверждение.'
+      }
+      if (msg.includes('менеджер') || msg.includes('позвоните') || msg.includes('перезвоните') || msg.includes('связаться')) {
+        return 'Хорошо, соединяем с менеджером. Удобнее звонок или Telegram? Контакт: +7 923 502-94-93. Если хотите, можете сразу оставить заявку в форме на сайте — менеджер увидит все детали и быстрее подтвердит выход.'
+      }
+      return 'Готов помочь с расчетом и подбором бригады. Напишите, пожалуйста: что нужно сделать, где объект и на когда нужен выход — после этого дам предметную консультацию и подскажу лучший формат заявки.'
+    }
+  })()
+</script>
 </body>
 </html>
+
