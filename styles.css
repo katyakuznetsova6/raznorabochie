@@ -453,6 +453,24 @@ summary:focus-visible {
   background-position: center;
 }
 
+.hero,
+.services-bg,
+.cases-bg {
+  animation: bgZoomPulse 16s ease-in-out infinite alternate;
+  will-change: background-size, background-position;
+}
+
+@keyframes bgZoomPulse {
+  from {
+    background-size: 106%;
+    background-position: 50% 50%;
+  }
+  to {
+    background-size: 114%;
+    background-position: 52% 46%;
+  }
+}
+
 .hero::before {
 content: "";
 position: absolute;
@@ -4562,12 +4580,43 @@ textarea {
   left: 20px;
   background: var(--accent);
   color: #000;
+  animation: callBtnBlink 4s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .tg-btn {
   right: 20px;
   background: var(--accent-alt);
   color: #fff;
+}
+
+@keyframes callBtnBlink {
+  0%,
+  78%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    filter: brightness(1);
+  }
+  82% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.45), 0 10px 24px rgba(0, 0, 0, 0.35);
+    filter: brightness(1.08);
+  }
+  86% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0), 0 8px 18px rgba(0, 0, 0, 0.35);
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .services-bg,
+  .cases-bg,
+  .call-btn {
+    animation: none !important;
+  }
 }
 
 /* Наверх: в духе .chat-toggle — тёмный фон, золотая обводка */
@@ -5032,16 +5081,16 @@ body.page-legal .legal-page {
   }
 
   .call-btn {
-    left: auto;
-    right: max(20px, env(safe-area-inset-right, 0px));
-    bottom: calc(max(120px, env(safe-area-inset-bottom, 0px)) + (45px * 2) + (12px * 2));
+    left: max(16px, env(safe-area-inset-left, 0px));
+    right: auto;
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
     z-index: 1001;
   }
 
   .tg-btn {
     left: auto;
-    right: max(20px, env(safe-area-inset-right, 0px));
-    bottom: max(120px, env(safe-area-inset-bottom, 0px));
+    right: max(16px, env(safe-area-inset-right, 0px));
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
     z-index: 1000;
   }
 
@@ -5056,9 +5105,18 @@ body.page-legal .legal-page {
 
   .container {
     width: min(1200px, 100%);
-    padding-inline: max(16px, env(safe-area-inset-left, 0px))
-      max(16px, env(safe-area-inset-right, 0px));
+    padding-inline: max(20px, env(safe-area-inset-left, 0px))
+      max(20px, env(safe-area-inset-right, 0px));
     box-sizing: border-box;
+  }
+
+  .build-faq-board,
+  .build-faq-board--blueprint,
+  .build-form-board,
+  .build-form-board--dispatch {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
   }
 }
 
@@ -5080,6 +5138,25 @@ body.page-legal .legal-page {
   .faq-item p {
     font-size: 14px;
     padding: 0 14px 14px;
+  }
+
+  .build-faq-board,
+  .build-faq-board--blueprint,
+  .build-form-board,
+  .build-form-board--dispatch {
+    border-radius: 12px;
+  }
+
+  .build-faq-board__body,
+  .build-form-board__body {
+    padding: 14px 12px 16px;
+  }
+
+  .build-faq-board .faq-list--build .faq-item summary,
+  .build-faq-board .faq-list--build .faq-item p {
+    font-size: 13.5px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
@@ -5626,6 +5703,14 @@ z-index: 2;
   .chat-toggle {
     width: 45px !important;
     height: 45px !important;
+    right: auto !important;
+    left: 50% !important;
+    bottom: max(18px, env(safe-area-inset-bottom, 0px)) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .chat-toggle:hover {
+    transform: translateX(-50%) translateY(-3px) !important;
   }
 }
 
@@ -5910,11 +5995,50 @@ z-index: 2;
 
 @media (max-width: 768px) {
   .chat-window {
-    bottom: max(196px, calc(120px + 64px + env(safe-area-inset-bottom, 0px)));
-    max-height: min(480px, calc(100vh - 220px));
+    bottom: max(82px, calc(62px + env(safe-area-inset-bottom, 0px)));
+    right: max(10px, env(safe-area-inset-right, 0px));
+    left: max(10px, env(safe-area-inset-left, 0px));
+    width: auto;
+    max-height: min(420px, calc(100vh - 190px));
+    border-radius: 14px;
   }
 
   .chat-messages {
-    max-height: min(300px, 42vh);
+    max-height: min(250px, 36vh);
+    padding: 10px 10px 12px;
+  }
+
+  .chat-input-area {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .chat-input-area input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .chat-send {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .chat-apply {
+    min-width: 42px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .chat-window {
+    bottom: max(76px, calc(58px + env(safe-area-inset-bottom, 0px)));
+    max-height: min(360px, calc(100vh - 170px));
+  }
+
+  .chat-messages {
+    max-height: min(210px, 32vh);
   }
 }

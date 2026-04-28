@@ -197,6 +197,9 @@
     serviceCards.forEach((el) => io.observe(el));
   }
 
+  const isCoarsePointer =
+    window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
   /** Услуги: удар → трещины → осколки (разлёт) → сборка в целую панель; второго удара нет */
   (function initServicesDemolishSequence() {
     const frame = document.querySelector("#services .photo-site-frame[data-smash-reveal]");
@@ -249,17 +252,16 @@
     }
 
     if (!reduceMotion) {
-      demolishCard.addEventListener(
-        "mouseenter",
-        function () {
-          if (frame.classList.contains("is-demolish-busy")) return;
-          runSmashSequence();
-        },
-        { passive: true }
-      );
+      const triggerSmash = function () {
+        if (frame.classList.contains("is-demolish-busy")) return;
+        runSmashSequence();
+      };
+      demolishCard.addEventListener("mouseenter", triggerSmash, { passive: true });
+      demolishCard.addEventListener("touchstart", triggerSmash, { passive: true });
     }
 
     function scheduleAfterBricksSettled() {
+      if (isCoarsePointer) return;
       const BRICK_SETTLE_MS = 1020;
       window.setTimeout(runSmashSequence, BRICK_SETTLE_MS);
     }
@@ -360,18 +362,17 @@
     }
 
     function scheduleAfterSettle() {
+      if (isCoarsePointer) return;
       window.setTimeout(runCargo, 1020);
     }
 
     if (!reduceMotion) {
-      loadersCard.addEventListener(
-        "mouseenter",
-        function () {
-          if (frame.classList.contains("is-cargo-busy")) return;
-          runCargo();
-        },
-        { passive: true }
-      );
+      const triggerCargo = function () {
+        if (frame.classList.contains("is-cargo-busy")) return;
+        runCargo();
+      };
+      loadersCard.addEventListener("mouseenter", triggerCargo, { passive: true });
+      loadersCard.addEventListener("touchstart", triggerCargo, { passive: true });
     }
 
     if (loadersCard.classList.contains("is-visible")) {
@@ -556,17 +557,15 @@
       }, pass1End);
     }
 
-    card.addEventListener(
-      "mouseenter",
-      function () {
-        playCleaning();
-      },
-      { passive: true }
-    );
+    const triggerCleaning = function () {
+      playCleaning();
+    };
+    card.addEventListener("mouseenter", triggerCleaning, { passive: true });
+    card.addEventListener("touchstart", triggerCleaning, { passive: true });
 
     /* Как грузчики / демонтаж: после «оседания» кирпичной сетки запускаем один раз */
     function scheduleAutoSweep() {
-      if (reduceMotion) return;
+      if (reduceMotion || isCoarsePointer) return;
       const BRICK_SETTLE_MS = 1020;
       window.setTimeout(playCleaning, BRICK_SETTLE_MS);
     }
@@ -607,9 +606,10 @@
     }
 
     card.addEventListener("mouseenter", playPodsob, { passive: true });
+    card.addEventListener("touchstart", playPodsob, { passive: true });
 
     function scheduleAuto() {
-      if (reduce) return;
+      if (reduce || isCoarsePointer) return;
       window.setTimeout(playPodsob, 1180);
     }
 
