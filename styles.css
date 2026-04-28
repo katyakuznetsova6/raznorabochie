@@ -462,12 +462,12 @@ summary:focus-visible {
 
 @keyframes bgZoomPulse {
   from {
-    background-size: 106%;
-    background-position: 50% 50%;
+    background-size: 104%;
+    background-position: center;
   }
   to {
-    background-size: 114%;
-    background-position: 52% 46%;
+    background-size: 120%;
+    background-position: center;
   }
 }
 
@@ -5994,6 +5994,13 @@ z-index: 2;
 }
 
 @media (max-width: 768px) {
+  .hero,
+  .services-bg,
+  .cases-bg {
+    animation-duration: 11s;
+    animation-timing-function: ease-in-out;
+  }
+
   .chat-window {
     bottom: max(82px, calc(62px + env(safe-area-inset-bottom, 0px)));
     right: max(10px, env(safe-area-inset-right, 0px));
@@ -6040,5 +6047,20 @@ z-index: 2;
 
   .chat-messages {
     max-height: min(210px, 32vh);
+  }
+}
+
+@media (max-width: 960px) and (pointer: coarse) {
+  .chat-window {
+    right: max(8px, env(safe-area-inset-right, 0px)) !important;
+    left: max(8px, env(safe-area-inset-left, 0px)) !important;
+    width: auto !important;
+    bottom: max(74px, calc(56px + env(safe-area-inset-bottom, 0px))) !important;
+    max-height: min(72vh, calc(100vh - 150px)) !important;
+    border-radius: 12px !important;
+  }
+
+  .chat-messages {
+    max-height: min(230px, 34vh) !important;
   }
 }

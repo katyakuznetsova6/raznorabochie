@@ -197,9 +197,6 @@
     serviceCards.forEach((el) => io.observe(el));
   }
 
-  const isCoarsePointer =
-    window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-
   /** Услуги: удар → трещины → осколки (разлёт) → сборка в целую панель; второго удара нет */
   (function initServicesDemolishSequence() {
     const frame = document.querySelector("#services .photo-site-frame[data-smash-reveal]");
@@ -258,10 +255,10 @@
       };
       demolishCard.addEventListener("mouseenter", triggerSmash, { passive: true });
       demolishCard.addEventListener("touchstart", triggerSmash, { passive: true });
+      demolishCard.addEventListener("click", triggerSmash, { passive: true });
     }
 
     function scheduleAfterBricksSettled() {
-      if (isCoarsePointer) return;
       const BRICK_SETTLE_MS = 1020;
       window.setTimeout(runSmashSequence, BRICK_SETTLE_MS);
     }
@@ -362,7 +359,6 @@
     }
 
     function scheduleAfterSettle() {
-      if (isCoarsePointer) return;
       window.setTimeout(runCargo, 1020);
     }
 
@@ -373,6 +369,7 @@
       };
       loadersCard.addEventListener("mouseenter", triggerCargo, { passive: true });
       loadersCard.addEventListener("touchstart", triggerCargo, { passive: true });
+      loadersCard.addEventListener("click", triggerCargo, { passive: true });
     }
 
     if (loadersCard.classList.contains("is-visible")) {
@@ -562,10 +559,11 @@
     };
     card.addEventListener("mouseenter", triggerCleaning, { passive: true });
     card.addEventListener("touchstart", triggerCleaning, { passive: true });
+    card.addEventListener("click", triggerCleaning, { passive: true });
 
     /* Как грузчики / демонтаж: после «оседания» кирпичной сетки запускаем один раз */
     function scheduleAutoSweep() {
-      if (reduceMotion || isCoarsePointer) return;
+      if (reduceMotion) return;
       const BRICK_SETTLE_MS = 1020;
       window.setTimeout(playCleaning, BRICK_SETTLE_MS);
     }
@@ -607,9 +605,10 @@
 
     card.addEventListener("mouseenter", playPodsob, { passive: true });
     card.addEventListener("touchstart", playPodsob, { passive: true });
+    card.addEventListener("click", playPodsob, { passive: true });
 
     function scheduleAuto() {
-      if (reduce || isCoarsePointer) return;
+      if (reduce) return;
       window.setTimeout(playPodsob, 1180);
     }
 
