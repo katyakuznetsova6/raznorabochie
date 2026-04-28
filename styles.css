@@ -453,35 +453,6 @@ summary:focus-visible {
   background-position: center;
 }
 
-.hero,
-.services-bg,
-.cases-bg {
-  animation: bgZoomPulse 16s ease-in-out infinite alternate;
-  will-change: background-size, background-position;
-}
-
-@keyframes bgZoomPulse {
-  from {
-    background-size: 104%;
-    background-position: center;
-  }
-  to {
-    background-size: 120%;
-    background-position: center;
-  }
-}
-
-@keyframes bgZoomPulseMobile {
-  from {
-    background-size: 108%;
-    background-position: center;
-  }
-  to {
-    background-size: 130%;
-    background-position: center;
-  }
-}
-
 .hero::before {
 content: "";
 position: absolute;
@@ -6005,7 +5976,8 @@ z-index: 2;
   .hero,
   .services-bg,
   .cases-bg {
-    animation: bgZoomPulseMobile 8.5s ease-in-out infinite alternate !important;
+    background-size: cover !important;
+    background-position: center !important;
   }
 
   .chat-window {
