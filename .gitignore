@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Secrets / env
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs / temp
+*.log
+node_modules/
+.cache/

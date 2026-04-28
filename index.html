@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Рабочий резерв в Челябинске: грузчики, подсобные рабочие и уборка территории от 400 руб/час.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- CSP: разрешены только нужные внешние источники (шрифты Google, Supabase, Gemini, Telegram-ссылки) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://generativelanguage.googleapis.com; frame-src 'self'; base-uri 'self'; form-action 'self' https://t.me;">
   <title>Рабочий резерв — разнорабочие в Челябинске</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    })();
+  </script>
 </head>
 
-<body>
+<body id="page-top">
   <a href="#main-content" class="skip-link">К основному содержимому</a>
 
   <header class="site-header">
@@ -30,6 +38,10 @@
           <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
           <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
         </button>
+        <span class="header-live-pill" title="Связь и выход на объект">
+          <span class="header-live-pill__dot" aria-hidden="true"></span>
+          На объекте
+        </span>
         <a href="#form" class="btn btn-header">Получить бригаду</a>
         <a href="#services" class="header-services-link">Услуги разнорабочих</a>
       </div>
@@ -53,7 +65,7 @@
       <div class="container hero-inner">
         <p class="hero-eyebrow">Челябинск и область</p>
     
-        <h1>Бригада, которая не пропадает на второй день</h1>
+        <h1>Бригада, которая <span class="build-highlight">не пропадает на второй день</span></h1>
     
         <p class="hero-lead">
           Работаем по Челябинску и области<br>
@@ -69,7 +81,7 @@
           <a href="tel:89235029493" class="btn btn-outline">Позвонить</a>
         </div>
 
-        <p class="muted">Уже помогли более чем на 100 объектах</p>
+        <p class="muted">Уже помогли более чем на <span class="build-stat" data-count-to="100">0</span> объектах</p>
     
         <p class="hero-sub">
           <span>✓ Работаем с прорабами, компаниями и частными заказчиками</span>
@@ -84,7 +96,10 @@
 
     <section class="section-block">
       <div class="container">
-        <h2>Знакомая ситуация?</h2>
+        <header class="section-head">
+          <p class="section-kicker">Объект</p>
+          <h2>Знакомая ситуация?</h2>
+        </header>
     
         <ul class="advantages">
           <li>Люди вышли — на второй день половина пропала</li>
@@ -102,7 +117,10 @@
 
     <section class="section-block section-alt">
       <div class="container">
-        <h2>Как мы работаем</h2>
+        <header class="section-head">
+          <p class="section-kicker">Процесс</p>
+          <h2>Как мы работаем</h2>
+        </header>
     
         <div class="services">
           <div class="card glow-panel">
@@ -129,37 +147,122 @@
     </section>
 
     <section id="services" class="section-block services-bg" aria-labelledby="services-title">
-      <div class="container">
-        <h2 id="services-title">Услуги разнорабочих</h2>
+      <div class="container photo-site-frame" data-smash-reveal>
+        <header class="section-head">
+          <p class="section-kicker">Услуги</p>
+          <h2 id="services-title">Услуги разнорабочих</h2>
+        </header>
         <p class="section-intro">Подберём состав бригады под вашу задачу — от разовой разгрузки до нескольких смен подряд.</p>
-        <div class="services">
-          <article class="card service-card glow-panel">
-            <h3>Грузчики</h3>
-            <p>Разгрузка и переезды без простоев и потери времени</p>
-          </article>
+        <div class="services services-brick">
+          <div class="service-cargo-spot">
+            <div class="service-cargo-box" aria-hidden="true">
+              <div class="service-cargo-box__tray">
+                <span class="service-cargo-box__body"></span>
+                <span class="service-cargo-box__inner-shade" aria-hidden="true"></span>
+                <span class="service-cargo-box__lid"></span>
+                <span class="service-cargo-box__tape"></span>
+              </div>
+            </div>
+            <article class="card service-card service-card--loaders glow-panel" data-reveal>
+              <div class="service-cargo-3d" aria-hidden="true">
+                <div class="service-cargo-f1">
+                  <div class="service-cargo-f1__left">
+                    <div class="service-cargo-f1__ink">
+                      <h3>Грузчики</h3>
+                      <p>Разгрузка и переезды без простоев и потери времени</p>
+                    </div>
+                  </div>
+                  <div class="service-cargo-f1__right">
+                    <div class="service-cargo-f1__hinge">
+                      <div class="service-cargo-f1__face service-cargo-f1__face--front">
+                        <div class="service-cargo-f1__ink service-cargo-f1__ink--r">
+                          <h3>Грузчики</h3>
+                          <p>Разгрузка и переезды без простоев и потери времени</p>
+                        </div>
+                      </div>
+                      <div
+                        class="service-cargo-f1__face service-cargo-f1__face--back"
+                        aria-hidden="true"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="service-cargo-f2" aria-hidden="true">
+                  <div class="service-cargo-f2__top">
+                    <div class="service-cargo-f2__ink service-cargo-f2__ink--t">
+                      <h3>Грузчики</h3>
+                      <p>Разгрузка и переезды без простоев и потери времени</p>
+                    </div>
+                  </div>
+                  <div class="service-cargo-f2__btm">
+                    <div class="service-cargo-f2__hinge2">
+                      <div class="service-cargo-f2__face service-cargo-f2__face--front">
+                        <div class="service-cargo-f2__ink service-cargo-f2__ink--b">
+                          <h3>Грузчики</h3>
+                          <p>Разгрузка и переезды без простоев и потери времени</p>
+                        </div>
+                      </div>
+                      <div
+                        class="service-cargo-f2__face service-cargo-f2__face--back"
+                        aria-hidden="true"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3>Грузчики</h3>
+              <p>Разгрузка и переезды без простоев и потери времени</p>
+            </article>
+          </div>
           
-          <article class="card service-card glow-panel">
+          <article class="card service-card service-card--podsob glow-panel" data-reveal>
+            <div class="service-podsob-fx" aria-hidden="true">
+              <span class="service-podsob-fx__rays"></span>
+              <span class="service-podsob-fx__figure service-podsob-fx__figure--1"></span>
+              <span class="service-podsob-fx__figure service-podsob-fx__figure--2"></span>
+              <span class="service-podsob-fx__figure service-podsob-fx__figure--3"></span>
+              <span class="service-podsob-fx__rim"></span>
+            </div>
             <h3>Подсобные рабочие</h3>
             <p>Усиливаем бригаду, чтобы объект не встал</p>
           </article>
+
+          <div class="service-smash-spot">
+            <span class="photo-smash-hammer" aria-hidden="true">🔨</span>
+            <div class="service-card-shards" aria-hidden="true">
+              <span class="service-card-shard" data-ragged="1"></span>
+              <span class="service-card-shard" data-ragged="2"></span>
+              <span class="service-card-shard" data-ragged="3"></span>
+              <span class="service-card-shard" data-ragged="4"></span>
+              <span class="service-card-shard" data-ragged="5"></span>
+              <span class="service-card-shard" data-ragged="6"></span>
+            </div>
+            <article class="card service-card service-card--demolish glow-panel" data-reveal>
+              <h3>Демонтаж</h3>
+              <p>Быстро разбираем и выносим без затягивания сроков</p>
+            </article>
+          </div>
           
-          <article class="card service-card glow-panel">
-            <h3>Демонтаж</h3>
-            <p>Быстро разбираем и выносим без затягивания сроков</p>
-          </article>
-          
-          <article class="card service-card glow-panel">
-            <h3>Уборка территории</h3>
-            <p>Убираем снег, мусор, чистим площадки и прилегающие территории</p>
-            <p style="margin-top:6px; font-size:14px; color:var(--muted);">Работаем не только на стройках — дворы, участки, возле магазинов, складов, кафе</p>
+          <article class="card service-card service-card--cleaning-sweep glow-panel" data-reveal>
+            <span class="service-ink-broom" aria-hidden="true">🧹</span>
+            <div class="service-ink">
+              <h3>Уборка территории</h3>
+              <p>Убираем снег, мусор, чистим площадки и прилегающие территории</p>
+              <p class="service-ink-note">
+                Работаем не только на стройках — дворы, участки, возле магазинов, складов, кафе
+              </p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
     <section class="section-block cases-bg">
-      <div class="container">
-        <h2>Формат работы</h2>
+      <div class="container photo-site-frame">
+        <header class="section-head">
+          <p class="section-kicker">Смена</p>
+          <h2>Формат работы</h2>
+        </header>
     
         <ul class="advantages">
           <li>Смена — 8 часов</li>
@@ -172,34 +275,115 @@
 
     <section id="calculator" class="section-block section-alt" aria-labelledby="calc-title">
       <div class="container">
-        <h2 id="calc-title">Калькулятор стоимости</h2>
-        <p class="section-intro">Ориентировочная сумма за выбранное число часов. Итоговая цена зависит от сложности — уточним по телефону.</p>
-        <div class="calculator glow-panel" id="price-calculator">
-          <div class="calc-row">
-            <label for="calc-hours">Часов работы</label>
-            <input type="number" id="calc-hours" name="calc-hours" min="1" max="720" value="4" inputmode="numeric">
-          </div>
-          <div class="calc-row">
-            <span class="calc-label" id="rate-label">Ставка за час</span>
-            <div class="rate-options" role="group" aria-labelledby="rate-label">
-              <label class="rate-option"><input type="radio" name="rate" value="400" checked> 400 ₽</label>
-              <label class="rate-option"><input type="radio" name="rate" value="500"> 500 ₽</label>
-              <label class="rate-option"><input type="radio" name="rate" value="650"> 650 ₽</label>
+        <header class="section-head">
+          <p class="section-kicker">Смета</p>
+          <h2 id="calc-title">Калькулятор стоимости</h2>
+        </header>
+        <p class="section-intro">
+          Ориентировочная сумма за выбранное число часов. Ползунок и кнопки ниже — для быстрой оценки; точное число можно ввести вручную.
+          Итог зависит от сложности — уточним по телефону.
+        </p>
+        <div class="calculator calculator--rich glow-panel" id="price-calculator">
+          <div class="calculator__inner">
+            <header class="calculator__head">
+              <span class="calculator__kicker">Смета онлайн</span>
+              <p class="calculator__tagline">Двигайте ползунок — сумма пересчитывается сразу</p>
+            </header>
+            <div class="calculator__grid">
+              <div class="calculator__controls">
+                <div class="calc-block">
+                  <div class="calc-block__title-row">
+                    <label class="calc-block__label" for="calc-hours-range">Часов работы</label>
+                    <span class="calc-hours-readout" aria-live="polite">
+                      <output id="calc-hours-out" for="calc-hours-range">4</output><span class="calc-hours-unit"> ч</span>
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    id="calc-hours-range"
+                    class="calc-range"
+                    min="1"
+                    max="72"
+                    value="4"
+                    step="1"
+                    aria-describedby="calc-range-help"
+                  >
+                  <p id="calc-range-help" class="calc-range-help">1–72 ч на ползунке; больше — в поле ниже.</p>
+                  <div class="calc-chips" role="group" aria-label="Быстрый выбор длительности">
+                    <button type="button" class="calc-chip" data-hours="4">4 ч</button>
+                    <button type="button" class="calc-chip" data-hours="8">Смена 8 ч</button>
+                    <button type="button" class="calc-chip" data-hours="12">12 ч</button>
+                    <button type="button" class="calc-chip" data-hours="24">Сутки 24 ч</button>
+                  </div>
+                  <div class="calc-manual">
+                    <label for="calc-hours">Точнее, часов</label>
+                    <div class="calc-manual__row">
+                      <input
+                        type="number"
+                        id="calc-hours"
+                        name="calc-hours"
+                        min="1"
+                        max="720"
+                        value="4"
+                        inputmode="numeric"
+                        autocomplete="off"
+                      >
+                      <span class="calc-manual__hint">макс. 720</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="calc-block calc-block--rates">
+                  <span class="calc-block__label" id="rate-label">Ставка за час</span>
+                  <div class="rate-options rate-options--tiles" role="radiogroup" aria-labelledby="rate-label">
+                    <label class="rate-option rate-option--tile">
+                      <input type="radio" name="rate" value="400" checked>
+                      <span class="rate-option__inner">
+                        <span class="rate-option__price">400 ₽</span>
+                        <span class="rate-option__hint">старт</span>
+                      </span>
+                    </label>
+                    <label class="rate-option rate-option--tile">
+                      <input type="radio" name="rate" value="500">
+                      <span class="rate-option__inner">
+                        <span class="rate-option__price">500 ₽</span>
+                        <span class="rate-option__hint">стандарт</span>
+                      </span>
+                    </label>
+                    <label class="rate-option rate-option--tile">
+                      <input type="radio" name="rate" value="650">
+                      <span class="rate-option__inner">
+                        <span class="rate-option__price">650 ₽</span>
+                        <span class="rate-option__hint">сложнее задачи</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <aside class="calculator__display-wrap">
+                <div class="calc-display" id="calc-display" aria-live="polite">
+                  <span class="calc-display__hint">Итого ориентировочно</span>
+                  <p class="calc-display__formula" id="calc-breakdown">4 ч × 400 ₽/час</p>
+                  <p class="calc-display__total">
+                    <span id="calc-total">1 600</span><span class="calc-currency"> ₽</span>
+                  </p>
+                  <p class="calc-display__meta" id="calc-note"></p>
+                </div>
+              </aside>
             </div>
           </div>
-          <p class="calc-result" aria-live="polite">
-            Примерно: <strong id="calc-total">1600</strong> <span class="calc-currency">₽</span>
-          </p>
         </div>
       </div>
     </section>
 
     <section id="prices" class="section-block" aria-labelledby="prices-title">
       <div class="container">
-        <h2 id="prices-title">Цены</h2>
+        <header class="section-head">
+          <p class="section-kicker">Ставка</p>
+          <h2 id="prices-title">Цены</h2>
+        </header>
     
         <p>
-          Ставка от <strong>400 до 650 ₽/час</strong> на одного работника
+          Ставка от <strong class="build-highlight">400 до 650 ₽/час</strong> на одного работника
         </p>
     
         <p class="section-intro">
@@ -215,7 +399,10 @@
 
     <section id="why" class="section-block section-alt" aria-labelledby="why-title">
       <div class="container">
-        <h2 id="why-title">Почему мы</h2>
+        <header class="section-head">
+          <p class="section-kicker">Стабильность</p>
+          <h2 id="why-title">Почему мы</h2>
+        </header>
         <ul class="advantages">
           <li>Если человек не вышел — делаем замену</li>
           <li>Подбираем людей под конкретную задачу</li>
@@ -227,7 +414,10 @@
 
     <section class="section-block">
       <div class="container">
-        <h2>Как это работает на практике</h2>
+        <header class="section-head">
+          <p class="section-kicker">Практика</p>
+          <h2>Как это работает на практике</h2>
+        </header>
 
         <div class="services">
 
@@ -266,10 +456,13 @@
 
     <section class="section-block section-alt">
       <div class="container">
-        <h2>С нами работают, потому что спокойно</h2>
+        <header class="section-head">
+          <p class="section-kicker">Цифры</p>
+          <h2>С нами работают, потому что спокойно</h2>
+        </header>
 
         <ul class="advantages">
-          <li>Более 100 объектов</li>
+          <li>Более <span class="build-highlight">100 объектов</span></li>
           <li>Более 500 смен</li>
           <li>90–95% стабильный выход людей</li>
           <li>Работаем по Челябинску и области</li>
@@ -289,16 +482,18 @@
 
     <section id="game-block" class="section-block">
       <div class="container">
-    
-        <h2>Почему объекты встают на 2-й день?</h2>
+        <header class="section-head section-head--center">
+          <p class="section-kicker">Наглядно</p>
+          <h2>Почему объекты встают на 2-й день?</h2>
+        </header>
     
         <p class="section-intro">
-          80% бригад разваливаются на второй день.  
+          <span class="build-highlight">80% бригад</span> разваливаются на второй день.
           Попробуй собрать тех, кто не сольётся.
         </p>
-        <p style="color:#ff3b3b; font-weight:600;">
+        <p class="game-spoiler">
           Спойлер: большинство не справляются
-          </p>
+        </p>
         <div class="game-wrapper glow-panel">
           <iframe src="./game.html" loading="lazy"></iframe>
         </div>
@@ -327,8 +522,10 @@
 
     <section class="section-block">
       <div class="container">
-
-        <h2>Ты только что увидел, как это происходит</h2>
+        <header class="section-head">
+          <p class="section-kicker">Итог</p>
+          <h2>Ты только что увидел, как это происходит</h2>
+        </header>
 
         <p class="section-intro">
           Сначала всё нормально<br>
@@ -337,224 +534,361 @@
           И объект просто встаёт
         </p>
 
-        <p>
-          Скорее всего, у тебя уже была такая ситуация
-        </p>
+        <p>Скорее всего, у тебя уже была такая ситуация</p>
+        <p>Почти каждый прораб через это проходит</p>
 
-        <p>
-          Почти каждый прораб через это проходит
-        </p>
-
-        <p>
-          Разница в цене — копейки<br>
-          Потеря времени — дни
-        </p>
-
-        <div style="margin-top:20px;">
+        <div class="build-follow-plank">
+          <p class="build-follow-plank__lead">
+            Разница в цене — копейки. Потеря времени — дни.
+          </p>
+          <div class="build-follow-plank__stack">
+            <p>Закроем вопрос с людьми без простоев на объекте.</p>
+          </div>
           <a href="#form" class="btn">Сделать, чтобы объект не встал</a>
-        </div>
-
-        <p style="margin-top:10px; font-size:14px; opacity:0.7;">
-          Подскажем, сколько нужно людей и назовём точную стоимость
-        </p>
-
-        <p style="margin-top:6px; font-size:14px; opacity:0.6;">
-          Сейчас есть люди на завтра. Дальше — по загрузке
-        </p>
-
-      </div>
-    </section>
-
-    <section id="faq" class="section-block" aria-labelledby="faq-title">
-      <div class="container">
-        <h2 id="faq-title">Частые вопросы</h2>
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>Как быстро можете приехать?</summary>
-            <p>Зависит от загрузки и района. В большинстве случаев договариваемся о выезде в день обращения или на следующий день — уточните в звонке или заявке.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Нужна ли предоплата?</summary>
-            <p>Условия оплаты обсуждаем заранее под конкретную задачу. Напишите или позвоните — подскажем по вашему случаю.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Работаете ли ночью или в выходные?</summary>
-            <p>Да, по договорённости. Ночные и праздничные смены могут влиять на ставку — это заранее оговариваем.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Можно ли заказать только грузчиков без машины?</summary>
-            <p>Да. Если нужен только труд на объекте — подберём состав бригады без транспорта.</p>
-          </details>
+          <div class="build-follow-plank__notes">
+            <p>Подскажем, сколько нужно людей и назовём точную стоимость.</p>
+            <p>Сейчас есть люди на завтра. Дальше — по загрузке.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="form" class="section-block section-alt" aria-labelledby="form-title">
+    <section id="faq" class="section-block build-faq-section build-faq-section--blueprint" aria-labelledby="faq-title">
       <div class="container">
-        <h2 id="form-title">Оставьте заявку — ответим в течение 10–15 минут</h2>
+        <header class="section-head section-head--faq">
+          <p class="section-kicker">Справка</p>
+          <h2 id="faq-title">Частые вопросы</h2>
+        </header>
+        <p class="section-intro build-faq-lead">
+          Коротко о том, как выходим на объект, оплате и формате — как памятка на площадке.
+        </p>
+
+        <div class="build-faq-board glow-panel build-faq-board--blueprint">
+          <div class="build-faq-board__tape" aria-hidden="true"></div>
+          <div class="build-faq-board__header">
+            <span class="build-faq-board__tag">Инструктаж / справочный лист</span>
+            <span class="build-faq-board__meta">
+              <span class="build-faq-board__stamp">ИНФО</span>
+              <span class="build-faq-board__hint">для ознакомления до оформления наряда</span>
+            </span>
+          </div>
+          <div class="build-faq-board__body">
+            <div class="faq-list faq-list--build">
+              <details class="faq-item">
+                <summary>Как быстро можете приехать?</summary>
+                <p>Зависит от загрузки и района. В большинстве случаев договариваемся о выезде в день обращения или на следующий день — уточните в звонке или заявке.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Нужна ли предоплата?</summary>
+                <p>Условия оплаты обсуждаем заранее под конкретную задачу. Напишите или позвоните — подскажем по вашему случаю.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Работаете ли ночью или в выходные?</summary>
+                <p>Да, по договорённости. Ночные и праздничные смены могут влиять на ставку — это заранее оговариваем.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Можно ли заказать только грузчиков без машины?</summary>
+                <p>Да. Если нужен только труд на объекте — подберём состав бригады без транспорта.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="form" class="section-block section-alt build-form-section build-form-section--dispatch" aria-labelledby="form-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="section-kicker">Заявка</p>
+          <h2 id="form-title">Оставьте заявку — ответим в течение 10–15 минут</h2>
+        </header>
         <p class="section-intro">Напишем в Telegram или перезвоним</p>
         <p class="section-intro">Заполните поля — откроется Telegram с готовым текстом. Останется только отправить сообщение.</p>
-        <form id="request-form" novalidate>
-          <label for="name">Имя</label>
-          <input type="text" id="name" name="name" placeholder="Ваше имя" required autocomplete="name">
 
-          <label for="phone">Телефон</label>
-          <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required autocomplete="tel">
+        <div class="build-form-board glow-panel build-form-board--dispatch" data-build-form-shell>
+          <div class="build-form-board__tape" aria-hidden="true"></div>
+          <div class="build-form-board__header">
+            <span class="build-form-board__tag">Заявка на выход бригады</span>
+            <span class="build-form-board__meta">
+              <span class="build-form-board__stamp">ЧЕЛЯБИНСК</span>
+              <span class="build-form-board__hint">смена / срок — уточним в ответе</span>
+            </span>
+          </div>
+          <div class="build-form-board__body">
+            <form id="request-form" data-supabase-form="1" novalidate>
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" placeholder="Ваше имя" required autocomplete="name">
 
-          <label for="task">Описание задачи</label>
-          <textarea id="task" name="task" placeholder="Адрес, что нужно сделать, желаемое время"></textarea>
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 900 000-00-00" required autocomplete="tel">
 
-          <label for="date">Удобная дата и время</label>
-          <input type="text" id="date" name="date" placeholder="Например: завтра в 14:00">
+              <label for="task">Описание задачи</label>
+              <textarea id="task" name="task" placeholder="Адрес, что нужно сделать, желаемое время"></textarea>
 
-          <button class="btn" type="submit">Отправить через Telegram</button>
-          <p id="form-status" class="form-status" aria-live="polite"></p>
-          <p style="font-size:14px; opacity:0.7;">
-            Ответим в течение 10–15 минут  
-            Не передаём контакты третьим лицам
-          </p>
-        </form>
+              <label for="date">Удобная дата и время</label>
+              <input type="text" id="date" name="date" placeholder="Например: завтра в 14:00">
+
+              <label class="build-form-consent" for="privacy-consent">
+                <input type="checkbox" id="privacy-consent" name="privacy_consent" value="1" required autocomplete="off">
+                <span class="build-form-consent__text">Согласен(на) с <a href="privacy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a> и на обработку персональных данных</span>
+              </label>
+
+              <button class="btn btn-build-submit" type="submit">Отправить через Telegram</button>
+              <p id="form-status" class="form-status" aria-live="polite"></p>
+              <p class="build-form-footnote">
+                Ответим в течение 10–15 минут · контакты не передаём третьим лицам
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section-block section-alt" style="text-align:center;">
-      <div class="container">
-        <h2>Если у вас объект — вам нужны не просто рабочие</h2>
-        <p class="section-intro" style="max-width:32em; margin:0 auto 16px;">
+    <section class="section-block section-alt section-cta-centered" aria-labelledby="pre-reviews-cta-title">
+      <div class="container section-cta-centered__inner">
+        <header class="section-head section-head--center section-head--plain">
+          <h2 id="pre-reviews-cta-title">Если у вас объект — вам нужны не просто рабочие</h2>
+        </header>
+        <p class="section-intro section-intro--center" style="margin-bottom:16px;">
           Нужны люди, которые выйдут и доведут работу до конца
         </p>
-        <p style="font-size:18px; font-weight:600;">Мы как раз про это</p>
-        <div style="margin-top:20px;">
-          <a href="#form" class="btn">Забронировать бригаду</a>
-        </div>
+        <p style="font-size:18px; font-weight:600; margin:0 0 20px;">Мы как раз про это</p>
+        <a href="#form" class="btn">Забронировать бригаду</a>
       </div>
     </section>
 
     <section id="reviews" class="section-block reviews-section" aria-labelledby="reviews-title">
-      <div class="reviews-track" id="reviews-track">
-        <div class="container reviews-sticky-inner">
-        <h2 id="reviews-title">Отзывы заказчиков</h2>
+      <div class="container reviews-inner">
+        <header class="section-head">
+          <p class="section-kicker">Обратная связь</p>
+          <h2 id="reviews-title">Отзывы заказчиков</h2>
+        </header>
         <p class="section-intro reviews-intro">
-          Коротко о том, что важно на объекте: выход, замена и спокойствие
+          Коротко о том, что важно на объекте: выход, замена и спокойствие. Листайте карточку влево/вправо или выберите точку внизу.
         </p>
-        <div class="reviews-stack" id="reviews-stack">
-          <article class="review-card">
-            <div class="review-stars" aria-label="Оценка 5 из 5">
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
+        <div
+          class="testimonial-stack"
+          id="testimonial-stack"
+          data-visible-behind="2"
+          aria-roledescription="карусель"
+        >
+          <article
+            class="review-card testimonial-card"
+            style="--avatar-grad: linear-gradient(145deg, #c9a000 0%, #16213e 90%);"
+          >
+            <div class="testimonial-card__body">
+              <div class="testimonial-head">
+                <div class="review-avatar" aria-hidden="true">А</div>
+                <div class="testimonial-head-text">
+                  <h3 class="testimonial-name">Алексей</h3>
+                  <p class="testimonial-role">прораб, частный дом</p>
+                </div>
+              </div>
+              <div class="review-stars" aria-label="Оценка 5 из 5">
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+              </div>
+              <blockquote class="review-quote">
+                <p>
+                  Вывели людей под задачу, одного заменили без простоя — как и обещали.
+                  Объект не встал, с таким сейчас редкость.
+                </p>
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="review-tags">
+                  <span class="review-tag review-tag--featured">Замена без простоя</span>
+                  <span class="review-tag">Частный объект</span>
+                </div>
+                <div class="review-stats">
+                  <span class="review-stat" aria-hidden="true"><span class="review-stat__icon">★</span> 5</span>
+                  <span class="review-stat">Бригада на объекте</span>
+                </div>
+              </div>
             </div>
-            <blockquote class="review-quote">
-              <p>
-                Вывели людей под задачу, одного заменили без простоя — как и обещали.
-                Объект не встал, с таким сейчас редкость.
-              </p>
-            </blockquote>
-            <footer class="review-meta">
-              <span class="review-name">Алексей</span>
-              <span class="review-role">прораб, частный дом</span>
-            </footer>
           </article>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Оценка 5 из 5">
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
+          <article
+            class="review-card testimonial-card"
+            style="--avatar-grad: linear-gradient(145deg, #f05423 0%, #4a1a0a 100%);"
+          >
+            <div class="testimonial-card__body">
+              <div class="testimonial-head">
+                <div class="review-avatar" aria-hidden="true">Т</div>
+                <div class="testimonial-head-text">
+                  <h3 class="testimonial-name">ООО «Транзит»</h3>
+                  <p class="testimonial-role">разгрузка, Челябинск</p>
+                </div>
+              </div>
+              <div class="review-stars" aria-label="Оценка 5 из 5">
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+              </div>
+              <blockquote class="review-quote">
+                <p>
+                  Нужны были грузчики срочно на склад. Приехали вовремя, без отговорок и «завтра разберёмся».
+                  Так работают не все.
+                </p>
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="review-tags">
+                  <span class="review-tag review-tag--featured">Срочный выезд</span>
+                  <span class="review-tag">Склад</span>
+                </div>
+                <div class="review-stats">
+                  <span class="review-stat" aria-hidden="true"><span class="review-stat__icon">★</span> 5</span>
+                  <span class="review-stat">Грузчики</span>
+                </div>
+              </div>
             </div>
-            <blockquote class="review-quote">
-              <p>
-                Нужны были грузчики срочно на склад. Приехали вовремя, без отговорок и «завтра разберёмся».
-                Так работают не все.
-              </p>
-            </blockquote>
-            <footer class="review-meta">
-              <span class="review-name">ООО «Транзит»</span>
-              <span class="review-role">разгрузка, Челябинск</span>
-            </footer>
           </article>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Оценка 5 из 5">
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
+          <article
+            class="review-card testimonial-card"
+            style="--avatar-grad: linear-gradient(145deg, #6b5ce7 0%, #16213e 100%);"
+          >
+            <div class="testimonial-card__body">
+              <div class="testimonial-head">
+                <div class="review-avatar" aria-hidden="true">М</div>
+                <div class="testimonial-head-text">
+                  <h3 class="testimonial-name">Марина</h3>
+                  <p class="testimonial-role">ремонт квартиры</p>
+                </div>
+              </div>
+              <div class="review-stars" aria-label="Оценка 5 из 5">
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+              </div>
+              <blockquote class="review-quote">
+                <p>
+                  Долго искали нормальных разнорабочих. Здесь человек не пропал на второй день — для нас это уже большой плюс.
+                </p>
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="review-tags">
+                  <span class="review-tag review-tag--featured">Люди на месте</span>
+                  <span class="review-tag">Ремонт</span>
+                </div>
+                <div class="review-stats">
+                  <span class="review-stat" aria-hidden="true"><span class="review-stat__icon">★</span> 5</span>
+                  <span class="review-stat">Разнорабочие</span>
+                </div>
+              </div>
             </div>
-            <blockquote class="review-quote">
-              <p>
-                Долго искали нормальных разнорабочих. Здесь человек не пропал на второй день — для нас это уже большой плюс.
-              </p>
-            </blockquote>
-            <footer class="review-meta">
-              <span class="review-name">Марина</span>
-              <span class="review-role">ремонт квартиры</span>
-            </footer>
           </article>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Оценка 5 из 5">
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
+          <article
+            class="review-card testimonial-card"
+            style="--avatar-grad: linear-gradient(145deg, #2d6a4f 0%, #0d1b14 100%);"
+          >
+            <div class="testimonial-card__body">
+              <div class="testimonial-head">
+                <div class="review-avatar" aria-hidden="true">Д</div>
+                <div class="testimonial-head-text">
+                  <h3 class="testimonial-name">Дмитрий</h3>
+                  <p class="testimonial-role">прораб, жилой комплекс</p>
+                </div>
+              </div>
+              <div class="review-stars" aria-label="Оценка 5 из 5">
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+              </div>
+              <blockquote class="review-quote">
+                <p>
+                  Работаем на монолите — людей подменять некому. Здесь держат слово: не вышел — подтянули другого, без отмазок.
+                </p>
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="review-tags">
+                  <span class="review-tag review-tag--featured">Подмена без срыва</span>
+                  <span class="review-tag">Монолит</span>
+                </div>
+                <div class="review-stats">
+                  <span class="review-stat" aria-hidden="true"><span class="review-stat__icon">★</span> 5</span>
+                  <span class="review-stat">Бригада</span>
+                </div>
+              </div>
             </div>
-            <blockquote class="review-quote">
-              <p>
-                Работаем на монолите — людей подменять некому. Здесь держат слово: не вышел — подтянули другого, без отмазок.
-              </p>
-            </blockquote>
-            <footer class="review-meta">
-              <span class="review-name">Дмитрий</span>
-              <span class="review-role">прораб, жилой комплекс</span>
-            </footer>
           </article>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Оценка 5 из 5">
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
-              <span class="review-star" aria-hidden="true">★</span>
+          <article
+            class="review-card testimonial-card"
+            style="--avatar-grad: linear-gradient(145deg, #ffd700 0%, #5c4a00 100%);"
+          >
+            <div class="testimonial-card__body">
+              <div class="testimonial-head">
+                <div class="review-avatar review-avatar--dark" aria-hidden="true">С</div>
+                <div class="testimonial-head-text">
+                  <h3 class="testimonial-name">ИП Сергеев</h3>
+                  <p class="testimonial-role">участок, Миасс</p>
+                </div>
+              </div>
+              <div class="review-stars" aria-label="Оценка 5 из 5">
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+                <span class="review-star" aria-hidden="true">★</span>
+              </div>
+              <blockquote class="review-quote">
+                <p>
+                  Заказывали уборку территории после подрядчика — привезли людей в срок, сделали без напоминаний. Так и хочется работать дальше.
+                </p>
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="review-tags">
+                  <span class="review-tag review-tag--featured">В срок</span>
+                  <span class="review-tag">Уборка территории</span>
+                </div>
+                <div class="review-stats">
+                  <span class="review-stat" aria-hidden="true"><span class="review-stat__icon">★</span> 5</span>
+                  <span class="review-stat">Участок</span>
+                </div>
+              </div>
             </div>
-            <blockquote class="review-quote">
-              <p>
-                Заказывали уборку территории после подрядчика — привезли людей в срок, сделали без напоминаний. Так и хочется работать дальше.
-              </p>
-            </blockquote>
-            <footer class="review-meta">
-              <span class="review-name">ИП Сергеев</span>
-              <span class="review-role">участок, Миасс</span>
-            </footer>
           </article>
         </div>
-        </div>
+        <div class="testimonial-pagination" id="testimonial-pagination" role="group" aria-label="Выбор отзыва"></div>
       </div>
     </section>
 
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-  
-        <!-- Бренд -->
-        <div class="footer-brand">
-          <h3>Рабочий резерв</h3>
-          <p>Бригады без срывов и простоев</p>
+    <div class="footer__topline" aria-hidden="true"></div>
+    <div class="container footer__shell">
+      <div class="footer__promo">
+        <div class="footer__promo-text">
+          <p class="footer__promo-kicker">На связи по заявкам</p>
+          <p class="footer__promo-title">Нужны люди на объект — оставьте заявку или позвоните. Ответим и подберём состав под задачу.</p>
         </div>
-  
-        <!-- Навигация -->
-        <div class="footer-nav">
-          <h4>Навигация</h4>
-          <ul>
+        <div class="footer__promo-actions">
+          <a href="#form" class="btn footer__promo-btn">Заявка на бригаду</a>
+          <a href="tel:89235029493" class="btn btn-outline footer__promo-btn footer__promo-btn--ghost">Позвонить</a>
+        </div>
+      </div>
+
+      <div class="footer__main">
+        <div class="footer__col footer__col--brand">
+          <a href="#page-top" class="footer__logo">Рабочий резерв</a>
+          <p class="footer__lead">Бригады разнорабочих и грузчиков: выход в срок, подмена без срыва смены.</p>
+          <p class="footer__geo">Челябинск и Челябинская область</p>
+        </div>
+
+        <nav class="footer__col footer__nav" aria-label="Навигация по сайту">
+          <h2 class="footer__h">Разделы</h2>
+          <ul class="footer__links">
             <li><a href="#services">Услуги</a></li>
             <li><a href="#calculator">Калькулятор</a></li>
             <li><a href="#prices">Цены</a></li>
@@ -564,44 +898,43 @@
             <li><a href="#form">Заявка</a></li>
             <li><a href="#reviews">Отзывы</a></li>
           </ul>
+        </nav>
+
+        <div class="footer__col">
+          <h2 class="footer__h">Контакты</h2>
+          <ul class="footer__contact-list">
+            <li>
+              <a href="tel:89235029493" class="footer__contact-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.6.57a1 1 0 011 1v3.4a1 1 0 01-1 1C11.3 21 3 12.7 3 2.5a1 1 0 011-1H7.4a1 1 0 011 1c0 1.3.2 2.5.57 3.6a1 1 0 01-.24 1l-2.17 2.17z"/>
+                </svg>
+                <span>+7 923 502-94-93</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/avk4488" target="_blank" rel="noopener noreferrer" class="footer__contact-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M9.04 15.36l-.38 5.35c.55 0 .78-.24 1.06-.53l2.54-2.43 5.27 3.86c.97.53 1.66.25 1.92-.9l3.48-16.3c.34-1.58-.57-2.2-1.52-1.85L1.5 9.4c-1.5.58-1.48 1.42-.26 1.8l5.84 1.82 13.57-8.56c.64-.42 1.22-.19.74.23"/>
+                </svg>
+                <span>Telegram</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:r.rezerv74@mail.ru" class="footer__contact-link">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <span>r.rezerv74@mail.ru</span>
+              </a>
+            </li>
+          </ul>
         </div>
-  
-        <!-- Контакты -->
-        <div class="footer-contacts">
-          <h4>Контакты</h4>
-  
-          <a href="tel:89235029493" class="footer-contact">
-            <!-- phone -->
-            <svg viewBox="0 0 24 24" width="18" height="18">
-              <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24c1.1.37 2.3.57 3.6.57a1 1 0 011 1v3.4a1 1 0 01-1 1C11.3 21 3 12.7 3 2.5a1 1 0 011-1H7.4a1 1 0 011 1c0 1.3.2 2.5.57 3.6a1 1 0 01-.24 1l-2.17 2.17z"/>
-            </svg>
-            <span>+7 923 502-94-93</span>
-          </a>
-  
-          <a href="https://t.me/avk4488" target="_blank" class="footer-contact">
-            <!-- telegram -->
-            <svg viewBox="0 0 24 24" width="18" height="18">
-              <path fill="currentColor" d="M9.04 15.36l-.38 5.35c.55 0 .78-.24 1.06-.53l2.54-2.43 5.27 3.86c.97.53 1.66.25 1.92-.9l3.48-16.3c.34-1.58-.57-2.2-1.52-1.85L1.5 9.4c-1.5.58-1.48 1.42-.26 1.8l5.84 1.82 13.57-8.56c.64-.42 1.22-.19.74.23"/>
-            </svg>
-            <span>Telegram</span>
-          </a>
-  
-          <a href="mailto:r.rezerv74@mail.ru" class="footer-contact">
-            <!-- mail -->
-            <svg viewBox="0 0 24 24" width="18" height="18">
-              <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-            <span>r.rezerv74@mail.ru</span>
-          </a>
-  
-          <p class="footer-location">📍 Челябинск и область</p>
-  
-        </div>
-  
       </div>
-  
-      <div class="footer-bottom">
-        <p>© Рабочий резерв</p>
+
+      <div class="footer__bar">
+        <p class="footer__copy">© <span id="year"></span> Рабочий резерв</p>
+        <a href="privacy.html" class="footer__legal-link">Политика конфиденциальности</a>
+        <a href="#page-top" class="footer__up">Наверх ↑</a>
       </div>
     </div>
   </footer>
@@ -618,6 +951,12 @@
     </svg>
   </a>
 
+  <button type="button" class="scroll-top-btn" id="scroll-top-btn" aria-label="Наверх страницы" title="Наверх">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
   <script src="script.js"></script>
 
 <script>
@@ -632,6 +971,9 @@ const observer = new IntersectionObserver(entries => {
 });
 
 elements.forEach(el => {
+  /* Секция услуг: не ставим fade-in на весь блок — иначе opacity:0 у родителя
+     скрывает кадры transition у .service-card, и «кирпичи» не видны. */
+  if (el.id === 'services') return;
   el.classList.add('fade-in');
   observer.observe(el);
 });
@@ -674,51 +1016,7 @@ window.addEventListener("scroll", () => {
 <!-- Подключение Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  // Инициализация Supabase
-  const { createClient } = supabase
-  const supabaseUrl = 'https://jlgqxbkxmrjyfaxdaarq.supabase.co'
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsZ3F4Ymt4bXJqeWZheGRhYXJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE5MjgsImV4cCI6MjA5Mjg2NzkyOH0.Ae0VWzvDwjQ-IBFEGa3A45ih2sLB-inLoXRxNWfVd-8'
-  const supabaseClient = createClient(supabaseUrl, supabaseKey)
-
-  // Обработка формы
-  const form = document.getElementById('request-form')
-  const formStatus = document.getElementById('form-status')
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault()
-    
-    const formData = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      service: document.getElementById('task').value,
-      status: 'new'
-    }
-
-    formStatus.textContent = 'Отправляем...'
-
-    try {
-      const { data, error } = await supabaseClient
-        .from('orders')
-        .insert([formData])
-
-      if (error) {
-        throw error
-      }
-
-      formStatus.textContent = '✅ Заявка отправлена! Сейчас свяжемся с вами.'
-      form.reset()
-      
-      // Открываем Telegram (как у тебя сейчас работает)
-      const tgText = `Новая заявка:%0AИмя: ${formData.name}%0AТелефон: ${formData.phone}%0AЗадача: ${formData.service}`
-      window.open(`https://t.me/avk4488?text=${tgText}`, '_blank')
-      
-    } catch (error) {
-      console.error('Ошибка:', error)
-      formStatus.textContent = '❌ Произошла ошибка. Попробуйте ещё раз или позвоните.'
-    }
-  })
-</script>
+<script src="form.js"></script>
 
 <!-- Кнопка чата -->
 <button id="chat-toggle" class="chat-toggle" aria-label="Открыть чат">
@@ -726,168 +1024,25 @@ window.addEventListener("scroll", () => {
 </button>
 
 <!-- Окно чата -->
-<div id="chat-window" class="chat-window" style="display: none;">
+<div
+  id="chat-window"
+  class="chat-window"
+  style="display: none;"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="chat-heading"
+>
   <div class="chat-header">
-    <h3>Помощник</h3>
-    <button id="chat-close" class="chat-close">×</button>
+    <h3 id="chat-heading">Помощник</h3>
+    <button id="chat-close" class="chat-close" type="button" aria-label="Закрыть чат">×</button>
   </div>
   <div id="chat-messages" class="chat-messages"></div>
   <div class="chat-input-area">
     <input type="text" id="chat-input" placeholder="Задайте вопрос..." autocomplete="off">
     <button id="chat-apply" class="chat-apply" type="button" title="Заполнить форму заявки из диалога">📝</button>
-    <button id="chat-send" class="chat-send">➤</button>
+    <button type="button" id="chat-send" class="chat-send" aria-label="Отправить сообщение">➤</button>
   </div>
 </div>
-
-<!-- Стили чата -->
-<style>
-  .chat-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #ffd700;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
-    z-index: 9999;
-    transition: transform 0.3s;
-  }
-  .chat-toggle:hover { transform: scale(1.1); }
-  
-  .chat-window {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    width: 350px;
-    max-height: 500px;
-    background: #16213e;
-    border-radius: 15px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.4);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid #0f3460;
-  }
-  
-  .chat-header {
-    background: #0f3460;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #1a1a2e;
-  }
-  .chat-header h3 { margin: 0; color: #ffd700; font-size: 16px; }
-  .chat-close {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-  }
-  .chat-close:hover { color: #e94560; }
-  
-  .chat-messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-    max-height: 350px;
-  }
-  
-  .chat-message {
-    margin-bottom: 12px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    max-width: 80%;
-    word-wrap: break-word;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  .chat-message.bot {
-    background: #0f3460;
-    color: #fff;
-    border-bottom-left-radius: 4px;
-  }
-  .chat-message.user {
-    background: #ffd700;
-    color: #1a1a2e;
-    margin-left: auto;
-    border-bottom-right-radius: 4px;
-  }
-  
-  .chat-input-area {
-    padding: 15px;
-    background: #0f3460;
-    display: flex;
-    gap: 10px;
-    border-top: 1px solid #1a1a2e;
-  }
-  .chat-input-area input {
-    flex: 1;
-    padding: 10px 14px;
-    border: 1px solid #1a1a2e;
-    border-radius: 20px;
-    background: #1a1a2e;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-  }
-  .chat-input-area input::placeholder { color: #666; }
-  .chat-send {
-    background: #ffd700;
-    color: #1a1a2e;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    transition: transform 0.2s;
-  }
-  .chat-send:hover { transform: scale(1.1); }
-  .chat-apply {
-    background: #00d9a3;
-    color: #0c2230;
-    border: none;
-    min-width: 44px;
-    height: 40px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 0 12px;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-  .chat-apply:hover { transform: translateY(-1px); }
-  .chat-apply:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-    transform: none;
-  }
-  
-  @media (max-width: 768px) {
-    .chat-window {
-      width: calc(100% - 40px);
-      right: 20px;
-      bottom: 100px;
-    }
-    .chat-toggle {
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-    }
-  }
-</style>
 
 <!-- Скрипт чата с Google Gemini -->
 <script>
@@ -926,6 +1081,7 @@ window.addEventListener("scroll", () => {
 • Если данных не хватает, задавай максимум 1 приоритетный уточняющий вопрос за сообщение.
 • Приоритет уточнений: сначала точный адрес объекта, затем контакты и детали объема.
 • Используй слово «адрес», не подменяй его «районом», если клиент уже описал задачу.
+• Если клиент уже пишет количество людей + время + адрес (например: «3 рабочих на завтра на Труда 67»), считай это готовностью к оформлению: уточни только вид работ и сразу направь в форму заявки (можно предложить кнопку 📝 для автозаполнения).
 • После консультации делай четкий next step: предложи оставить заявку через форму и коротко подскажи, что указать.
 • На менеджера переводи только в двух случаях:
   1) клиент сам просит связать с менеджером/звонок;
@@ -1003,7 +1159,9 @@ window.addEventListener("scroll", () => {
       if (!leadContext.location) {
         const location = firstMatch(src, [
           /(?:адрес|район|объект)\s*[:\-]?\s*([^\n,.!?]{3,60})/i,
-          /(?:в|на)\s+(челябинск[^\n,.!?]{0,40}|[А-ЯA-ZЁ][^\n,.!?]{2,40})/i
+          /(?:в|на)\s+(челябинск[^\n,.!?]{0,40}|[А-ЯA-ZЁ][^\n,.!?]{2,40})/i,
+          /((?:ул\.?|улица|проспект|пр-т|переулок|пер\.?|шоссе|ш\.?)\s*[^\n,.!?]{2,50}\d{1,4}[а-яa-z]?)/i,
+          /(?:в|на)\s+([а-яёa-z\- ]{3,40}\s+\d{1,4}[а-яa-z]?)/i
         ])
         if (location && !/день|час|смен|руб|цен/i.test(location)) {
           leadContext.location = location
@@ -1037,6 +1195,25 @@ window.addEventListener("scroll", () => {
       if (leadContext.people) score += 1
       if (leadContext.duration) score += 1
       return score
+    }
+
+    function hasAddressLikeSignal(text) {
+      const src = String(text || '')
+      const lower = src.toLowerCase()
+      if (/(ул\.?|улиц|просп|пр-т|переул|пер\.?|шоссе|ш\.?|бульв|бул\.?|дом|д\.)\s*[а-яa-z0-9\- ]{2,}/i.test(src)) return true
+      if (/(?:на|в)\s+[а-яёa-z\- ]{3,40}\s+\d{1,4}[а-яa-z]?/i.test(src)) return true
+      if (/(ленина|труда|братьев\s+кашириных|свердловск|комсомольск|молодогвардейц|побед|салютн)/i.test(lower) && /\d{1,4}/.test(src)) return true
+      return false
+    }
+
+    function hasApplyIntentSignal(text) {
+      const src = String(text || '')
+      const lower = src.toLowerCase()
+      const hasPeople = /(?:\d{1,2}\s*(?:чел|человек|рабоч|грузчик)|нужно\s*\d{1,2})/i.test(lower)
+      const hasTime = /(сегодня|завтра|послезавтра|к\s*\d{1,2}:\d{2}|\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)/i.test(lower)
+      const hasAddress = hasAddressLikeSignal(src) || Boolean(leadContext.location)
+      const hasDirectOrderWords = /(нужн|надо|требу|оформ|заказ|заявк|бронь|бригад)/i.test(lower)
+      return (hasPeople && hasTime && hasAddress) || (hasDirectOrderWords && hasPeople && hasAddress)
     }
 
     function updateApplyButtonState() {
@@ -1075,6 +1252,7 @@ window.addEventListener("scroll", () => {
 
     function buildUserPrompt(userText) {
       const missing = getMissingLeadFields()
+      const applyIntent = hasApplyIntentSignal(userText)
       const known = [
         `задача: ${leadContext.task || 'не указана'}`,
         `локация: ${leadContext.location || 'не указана'}`,
@@ -1087,10 +1265,13 @@ window.addEventListener("scroll", () => {
         `Сообщение клиента: "${userText}"`,
         `Текущий контекст заявки: ${known}.`,
         'Важно по стилю: не начинай ответ с приветствия, если диалог уже идет; ответ короткий и живой.',
+        applyIntent
+          ? 'Клиент, вероятно, уже готов к заявке. Если не хватает именно вида работ — задай только один вопрос про вид работ (например: грузчики/подсобные/демонтаж/уборка), затем направь в форму и предложи кнопку 📝 для автозаполнения.'
+          : '',
         missing.length
           ? `Не хватает данных: ${missing.join(', ')}. Дай консультацию и задай ровно 1 самый важный уточняющий вопрос (приоритет: адрес).`
           : 'Данных достаточно: проконсультируй и мягко веди к оформлению заявки через форму.'
-      ].join('\n')
+      ].filter(Boolean).join('\n')
     }
 
     chatToggle.addEventListener('click', () => {
@@ -1272,13 +1453,29 @@ window.addEventListener("scroll", () => {
     function getFallbackResponse(message) {
       const msg = (message || '').toLowerCase()
       const missing = getMissingLeadFields()
+      const applyIntent = hasApplyIntentSignal(message)
+      const contextReadyForApply = Boolean(
+        leadContext.task && leadContext.location && leadContext.startTime && leadContext.people
+      )
+      if (applyIntent) {
+        if (!leadContext.task) {
+          return 'Отлично, вижу готовность оформить заявку. Уточните, пожалуйста, какой именно вид работ нужен на объекте (грузчики, подсобные, демонтаж, уборка и т.д.) — и сразу перенесу всё в форму по кнопке 📝.'
+        }
+        return 'Отлично, можно оформлять. Нажмите кнопку 📝 в чате — подставлю данные в форму заявки, останется проверить телефон и отправить через Telegram.'
+      }
+      if (contextReadyForApply) {
+        if (!leadContext.duration) {
+          return `Отлично, всё почти готово. Подскажите, на сколько часов или смен нужны ${leadContext.task}, и сразу перенесу данные в форму по кнопке 📝.`
+        }
+        return 'Отлично, данные собраны. Нажмите кнопку 📝 в чате — подставлю всё в форму заявки, останется проверить телефон и отправить через Telegram.'
+      }
       if (msg.includes('цена') || msg.includes('стоимост') || msg.includes('сколько')) {
         return `💰 Базово ориентируйтесь на 400–650 ₽/час за человека. Для точнее расчета нужны детали: ${missing.slice(0, 2).join(' и ') || 'задача и объем работ'}.`
       }
       if (msg.includes('срок') || msg.includes('быстро') || msg.includes('когда') || msg.includes('завтра')) {
-        return '⏱️ Обычно выводим людей на следующий день, при текущей загрузке иногда можем день в день. Если подскажете район и сколько человек нужно, сориентирую по самому реальному времени старта.'
+        return '⏱️ Обычно выводим людей на следующий день, при текущей загрузке иногда можем день в день. Подскажите точный адрес и сколько человек нужно — сориентирую по самому реальному времени старта.'
       }
-      if (msg.includes('грузчик') || msg.includes('разгруз') || msg.includes('переезд')) {
+      if (msg.includes('грузчик') || msg.includes('разгруз') || msg.includes('переезд') || msg.includes('подсоб') || msg.includes('демонтаж') || msg.includes('уборк')) {
         return '📦 Да, с грузчиками работаем: разгрузка, переезды, складские задачи. Подберем состав под ваш объем — скажите, что разгружаем/переносим и сколько примерно часов работы.'
       }
       if (msg.includes('ип') || msg.includes('ооо') || msg.includes('юрлиц') || msg.includes('документ')) {
